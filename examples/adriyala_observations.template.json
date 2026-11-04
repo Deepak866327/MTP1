@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "units": {"length": "m"},
+  "name": "Adriyala monitoring observations — complete the missing metadata",
+  "evidence": "field_measurements",
+  "vertical_sign": "up_positive",
+  "coordinate_reference": null,
+  "vertical_datum": null,
+  "measurement_stage": null,
+  "provenance": null,
+  "line_roles": {"S11-S58": "fit", "S61-S99": "test"},
+  "reported_rmse_m_by_line": {"S11-S58": 0.25, "S61-S99": 0.26},
+  "reported_metrics_source": "MTP 1.pdf, PDF p.26; approximate values reported by the original report, not independently reproduced."
+}

@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "evidence": "approximate_digitized_published_curves",
+  "source_root_relative": "../..",
+  "source_pdf": "MTP 1.pdf",
+  "source_pdf_sha256": "49f44416d43ce6ff3454fe7d60a3aa1edc8254a7dc7cfa2c7f2a5e2248a7b458",
+  "method": "Manual sparse trace readings from the scanned left subsidence axes; piecewise plot-border normalization compensates approximately for page curvature; horizontal shear is referred to the bottom axis. Original station locations and identities are not inferred.",
+  "vertical_uncertainty_m_assumed": 0.05,
+  "distance_uncertainty_m_assumed": 10.0,
+  "comparison_spacing_m": 10.0,
+  "reported_metrics_source": "MTP 1.pdf, PDF p.26: approximately 0.25 m fitting and 0.26 m testing.",
+  "limitations": [
+    "Digitized traces are approximate and coarser than the original station data.",
+    "Only published observed and published fitted/predicted subsidence curves are compared; estimated-strain curves use a different axis and are excluded.",
+    "Distances do not establish global x/y station positions or a survey transform.",
+    "Assumed digitization bounds are not statistical confidence intervals; a vertical-only RMSE bound omits distance error and sparse tracing error.",
+    "No rebuilt-engine station validation or original-RMSE reproduction is claimed."
+  ],
+  "lines": [
+    {
+      "line_id": "S11-S58",
+      "role": "fit",
+      "pdf_page": 25,
+      "source_image": "docs/source_extracts/images/mtp1_25.png",
+      "source_image_sha256": "4947f7658a168338d697d8ceb695622528b250a1ddbe7d6319b5e1470dda3479",
+      "reported_rmse_m": 0.25,
+      "left_axis_calibration": {
+        "reference_x_px": 270,
+        "zero_y_px": 833,
+        "negative_tick_y_px": 1054,
+        "negative_tick_uz_m": -1.2
+      },
+      "top_border_px": [
+        [
+          270,
+          786
+        ],
+        [
+          400,
+          782
+        ],
+        [
+          550,
+          782
+        ],
+        [
+          700,
+          784
+        ],
+        [
+          850,
+          785
+        ],
+        [
+          980,
+          780
+        ]
+      ],
+      "bottom_border_px": [
+        [
+          270,
+          1079
+        ],
+        [
+          400,
+          1075
+        ],
+        [
+          550,
+          1068
+        ],
+        [
+          700,
+          1061
+        ],
+        [
+          850,
+          1054
+        ],
+        [
+          980,
+          1050
+        ]
+      ],
+      "distance_ticks_px_m": [
+        [
+          313,
+          0
+        ],
+        [
+          464,
+          100
+        ],
+        [
+          609,
+          200
+        ],
+        [
+          750,
+          300
+        ],
+        [
+          883,
+          400
+        ]
+      ],
+      "horizontal_shear_to_bottom_px": 9,
+      "samples_px_observed_y_predicted_y": [
+        [
+          310,
+          833,
+          833
+        ],
+        [
+          350,
+          797,
+          833
+        ],
+        [
+          390,
+          838,
+          838
+        ],
+        [
+          430,
+          842,
+          848
+        ],
+        [
+          470,
+          860,
+          870
+        ],
+        [
+          510,
+          866,
+          906
+        ],
+        [
+          550,
+          908,
+          940
+        ],
+        [
+          590,
+          936,
+          981
+        ],
+        [
+          630,
+          1004,
+          1014
+        ],
+        [
+          670,
+          1033,
+          1033
+        ],
+        [
+          710,
+          1043,
+          1041
+        ],
+        [
+          750,
+          1023,
+          1039
+        ],
+        [
+          790,
+          958,
+          1025
+        ],
+        [
+          830,
+          912,
+          1001
+        ],
+        [
+          870,
+          882,
+          961
+        ],
+        [
+          910,
+          856,
+          919
+        ],
+        [
+          945,
+          847,
+          889
+        ]
+      ]
+    },
+    {
+      "line_id": "S61-S99",
+      "role": "test",
+      "pdf_page": 26,
+      "source_image": "docs/source_extracts/images/mtp1_26.png",
+      "source_image_sha256": "e8fd0bbe97923b1f180323de17677b1aa8f877c455c2b4783f16d4ce60acfee6",
+      "reported_rmse_m": 0.26,
+      "left_axis_calibration": {
+        "reference_x_px": 273,
+        "zero_y_px": 424,
+        "negative_tick_y_px": 684,
+        "negative_tick_uz_m": -1.6
+      },
+      "top_border_px": [
+        [
+          273,
+          414
+        ],
+        [
+          340,
+          408
+        ],
+        [
+          420,
+          410
+        ],
+        [
+          500,
+          419
+        ],
+        [
+          580,
+          428
+        ],
+        [
+          660,
+          437
+        ],
+        [
+          740,
+          445
+        ],
+        [
+          820,
+          452
+        ],
+        [
+          900,
+          456
+        ],
+        [
+          960,
+          456
+        ]
+      ],
+      "bottom_border_px": [
+        [
+          273,
+          704
+        ],
+        [
+          340,
+          702
+        ],
+        [
+          420,
+          703
+        ],
+        [
+          500,
+          706
+        ],
+        [
+          580,
+          712
+        ],
+        [
+          660,
+          718
+        ],
+        [
+          740,
+          722
+        ],
+        [
+          820,
+          724
+        ],
+        [
+          900,
+          725
+        ],
+        [
+          960,
+          723
+        ]
+      ],
+      "distance_ticks_px_m": [
+        [
+          305,
+          0
+        ],
+        [
+          473,
+          100
+        ],
+        [
+          632,
+          200
+        ],
+        [
+          785,
+          300
+        ],
+        [
+          933,
+          400
+        ]
+      ],
+      "horizontal_shear_to_bottom_px": 3,
+      "samples_px_observed_y_predicted_y": [
+        [
+          305,
+          424,
+          424
+        ],
+        [
+          340,
+          421,
+          423
+        ],
+        [
+          380,
+          434,
+          436
+        ],
+        [
+          420,
+          450,
+          457
+        ],
+        [
+          460,
+          469,
+          483
+        ],
+        [
+          500,
+          499,
+          519
+        ],
+        [
+          540,
+          499,
+          565
+        ],
+        [
+          560,
+          494,
+          581
+        ],
+        [
+          580,
+          599,
+          600
+        ],
+        [
+          600,
+          643,
+          613
+        ],
+        [
+          620,
+          648,
+          624
+        ],
+        [
+          640,
+          668,
+          631
+        ],
+        [
+          660,
+          681,
+          637
+        ],
+        [
+          680,
+          690,
+          640
+        ],
+        [
+          700,
+          707,
+          641
+        ],
+        [
+          720,
+          671,
+          642
+        ],
+        [
+          740,
+          640,
+          640
+        ],
+        [
+          760,
+          641,
+          636
+        ],
+        [
+          780,
+          603,
+          628
+        ],
+        [
+          800,
+          568,
+          619
+        ],
+        [
+          820,
+          555,
+          607
+        ],
+        [
+          840,
+          541,
+          593
+        ],
+        [
+          860,
+          519,
+          578
+        ],
+        [
+          880,
+          501,
+          563
+        ],
+        [
+          900,
+          491,
+          548
+        ],
+        [
+          920,
+          475,
+          532
+        ],
+        [
+          932,
+          482,
+          523
+        ]
+      ]
+    }
+  ]
+}

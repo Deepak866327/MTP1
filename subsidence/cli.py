@@ -48,8 +48,41 @@ def main(argv=None) -> int:
             command.add_argument("--profiles", help="Optional line-profile definitions JSON.")
     verify_inclined = commands.add_parser("verify-inclined", help="Verify transformations, zero dip and inclined numerical convergence.")
     verify_inclined.add_argument("--output", required=True, help="New or empty verification directory.")
+    evaluate = commands.add_parser("evaluate-stations", help="Compare frozen-model predictions with supplied station measurements.")
+    evaluate.add_argument("project", help="Geometry project JSON.")
+    evaluate.add_argument("--model", required=True, help="Flat or inclined settings JSON.")
+    evaluate.add_argument("--observations", required=True, help="Station coordinates/observed Uz CSV.")
+    evaluate.add_argument("--metadata", required=True, help="Measurement provenance, datum/sign/stage and line roles JSON.")
+    evaluate.add_argument("--output", required=True, help="New or empty comparison directory.")
+    audit = commands.add_parser("audit-report-profiles", help="Audit approximate digitized published curves; no station coordinates inferred.")
+    audit.add_argument("traces", help="Pixel traces/calibration/provenance JSON.")
+    audit.add_argument("--output", required=True, help="New or empty audit directory.")
+    verify_baseline = commands.add_parser("verify-baseline", help="Verify station ingestion, sign conversion and known residual metrics on synthetic data.")
+    verify_baseline.add_argument("--output", required=True, help="New or empty verification directory.")
     args = parser.parse_args(argv)
     try:
+        if args.command == "verify-baseline":
+            from .phase5_verification import export_baseline_verification
+            report = export_baseline_verification(args.output)
+            print(json.dumps({"output": args.output, "passed": report["passed"], "check_count": len(report["checks"]), "evidence": report["evidence"]}, indent=2))
+            return 0 if report["passed"] else 1
+        if args.command == "audit-report-profiles":
+            from .digitization import load_digitized_report
+            from .phase5_results import export_digitized_report
+            report = load_digitized_report(args.traces)
+            summary = export_digitized_report(report, args.output)
+            print(json.dumps({"output": args.output, "status": summary["status"], "lines": [{"line_id": l["line_id"], "digitized_curve_rmse_m": l["rmse_m"], "source_reported_rmse_m": l["reported_rmse_m"]} for l in summary["lines"]]}, indent=2))
+            return 0
+        if args.command == "evaluate-stations":
+            from .evaluation import evaluate_stations
+            from .observations import load_observations
+            from .phase5_results import export_baseline
+            project, model = load_project(args.project), load_model(args.model)
+            dataset = load_observations(args.observations, args.metadata)
+            result = evaluate_stations(project, model, dataset)
+            summary = export_baseline(project, model, result, args.output)
+            print(json.dumps({"output": args.output, "status": summary["status"], "line_metrics": summary["line_metrics"]}, indent=2))
+            return 0
         if args.command == "verify-inclined":
             from .phase4_verification import export_inclined_verification, run_inclined_verification
             report = run_inclined_verification()
