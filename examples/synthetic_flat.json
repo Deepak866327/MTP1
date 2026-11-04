@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "Symmetric synthetic flat panel",
+  "evidence": "synthetic_geometry",
+  "units": {"length": "m"},
+  "surface_elevation_m": 0.0,
+  "field": {"xmin_m": -500.0, "xmax_m": 500.0, "ymin_m": -400.0, "ymax_m": 400.0},
+  "seam": {"reference_xyz_m": [0.0, 0.0, -400.0], "normal_xyz": [0.0, 0.0, 1.0]},
+  "extraction_rectangles": [
+    {"xmin_m": -200.0, "xmax_m": 200.0, "ymin_m": -100.0, "ymax_m": 100.0}
+  ],
+  "source_mesh": {"dx_m": 10.0, "dy_m": 10.0},
+  "surface_grid": {"dx_m": 20.0, "dy_m": 20.0},
+  "provenance": {"description": "Constructed verification geometry; contains no field observations."},
+  "notes": [
+    "Synthetic geometry, not a mine validation case.",
+    "Phase 1 contains geometry only. Displacement and strain are not yet calculated."
+  ]
+}

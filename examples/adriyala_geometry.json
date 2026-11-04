@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "name": "Adriyala reported computational geometry",
+  "evidence": "reported_geometry",
+  "units": {"length": "m"},
+  "surface_elevation_m": 0.0,
+  "field": {"xmin_m": 0.0, "xmax_m": 2310.0, "ymin_m": 0.0, "ymax_m": 470.0},
+  "seam": {
+    "reference_xyz_m": [0.0, 120.0, -456.68],
+    "normal_xyz": [-0.0186, -0.1779, 0.9838]
+  },
+  "extraction_rectangles": [
+    {"xmin_m": 0.0, "xmax_m": 2310.0, "ymin_m": 120.0, "ymax_m": 370.0}
+  ],
+  "source_mesh": {"dx_m": 10.0, "dy_m": 10.0},
+  "surface_grid": {"dx_m": 10.0, "dy_m": 10.0},
+  "provenance": {
+    "source_file": "MTP 1.pdf",
+    "pdf_pages": [24, 25],
+    "transcription_file": "docs/adriyala_reported_inputs.json",
+    "physical_panel_length_m_as_reported": 2333.0,
+    "physical_depth_range_m_as_reported": [366.12, 456.68],
+    "p_m_as_reported_not_applied": 1.3,
+    "influence_angle_deg_as_reported_not_applied": 20.0,
+    "source_mesh_choice": "10 m plan spacing is a rebuild choice, independent of observation spacing."
+  },
+  "notes": [
+    "Geometry reconstruction from reported inputs; this is not field validation or reproduced RMSE.",
+    "Computational panel is 2310 m long; reported physical panel is 2333 m long.",
+    "Rounded plane inputs give a minimum extraction-corner depth near 367.80 m, differing from the reported physical minimum 366.12 m.",
+    "p versus Smax, normal versus vertical depth, area measure, kernel support and displacement rotation remain unresolved before the inclined solver.",
+    "Raw monitoring-station coordinates and measurements are unavailable in this workspace."
+  ]
+}

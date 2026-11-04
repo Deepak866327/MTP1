@@ -1,0 +1,1040 @@
+
+
+===== PDF PAGE 1 =====
+
+CHAPTER
+12
+Subsidence
+12.1INTRODUCTION
+offuidsSecondly,surfaceandundergroundexcavationcause susidence througinduced
+changesntresstrananddslacmentfsnadacent ilandrockmasmtm
+excavatonmaynatralrosfoxaoaonfltoncavitbylan
+ground water orflowingwaterchaelinlimestoneformationsIf theinduceddisplacements
+from underground excavation extend to the surface,then subsidence occurs on the surface.In
+caseswherdamagetosurfacestructuresrunderrounduilitieoccurtherisconsiderable
+mportanceatached to thedeterminationof thecauseofdamageinthepresenceof subsidence
+and the actual subsidence mechanism.
+Caving is an ofen observed phenomenon associated with underground mining and begins
+with collapse of the back,roof,or hanging wall. Caving may occur unexpectedly or be
+deliberately induced based on the rock strata and mining methods such as block caving,sub-
+level caving,ongwallminingbord andpillarminingwithpillar extraction.Cavingbeginswith
+rock fractures andfailures just above the excavated zone and extends to the upper rock layers.
+Finally,broken rockpieces fall to the floor.Failure of therockmassisgreatly assisted by
+thepreencefxistngjintllaneharonandtdisntiutia
+process may cease once the caved bulk volume completely occupies the void space and an
+equilibrium condition occurs.It may be noted that volume of broken rock mass is higher than
+345
+
+===== PDF PAGE 2 =====
+
+346Fundamentals andApplications of RockMechanics
+asbulkingfactor.
+followingtypesofsubsidence havebeenobserved:
+(i)Trough subsidence
+fist
+(i)Subsurface caving
+(ii) Plug caving
+(iv) Chimneyingor pipingor funnelling or sinkhole
+dr
+th
+In this chapterthemechanics of trough susidence and sinkhole are discussed.
+topof thiszonesoil layermay deformcausing trough subsidence on the surface.
+in Section 12.5.
+Subsidence
+Angleof
+mep
+pa
+Panel width
+FIGURE.chematif caving susidenceveraongwallpanelhowingfractureonesadapted
+fromPeng,1992).
+
+===== PDF PAGE 3 =====
+
+347
+TROUGHSUBSIDENCE
+Subsidence basin
+Mined-out longwallpanel
+Trough subsidence
+Surface
+(major cross-section)
+Trough subsidence
+(longitudinal section)
+8:Angleof draw
+FIGURE 12.2 Subsidence basin and cross-sections.
+Themagnitude,extent and shape ofa trough susidencebasin and surface deformation
+enormallydivided into two categories:
+(i Immediate roofs:upto5 to 10m above the seam
+(i) Main roofs:upto 20 to 30 m above the immediate roofs.
+factorsfmediateandmainroofandtherwhichaffcttheseproprti
+(i Physical and geomechanical properties of immediate andmain roofs strata
+Immediateroofs
+Main roofs
+Strong/hard
+Strong/hard
+Strong/hard
+Weak/soft
+Weak/soft
+Strong/hard
+Weak/soft
+Weak/soft
+
+===== PDF PAGE 4 =====
+
+348Fundamentals and Aplicationsof RockMechanics
+（i）Mined out opening orgob size
+(i)Mining depth
+（iv)Miningheight
+(v)Topography
+(vi)Time
+2.3.1 Components of Surface Movement
+longwall panel.Based on this, the following components are defined.
+0.5s
+Infection point
+Subsidence
+... Slope
+Horizontal displacement
+-.--Horizontal strain
+FIGURE 12.3 Terminologies used associated with subcritical subsidence profile.
+(iHorizontal displacement u):On anymajor cros-section,the horizontal component
+ofthe surfacemovement vectoriscalled surfacehorizontal dislacement.It generaly
+the down dip direction.
+
+===== PDF PAGE 5 =====
+
+Subsidence
+349
+Vs-5=小
+XC-XA
+(12.1)
+strain between points A and C can be expressed as:
+uc-uA
+(12.2)
+XC-XA
+Itisnoteworthythatuniformhrizntaldisplacementmaynotcauseanydirectdamae
+strains along the surface of the subsidence trough.Most surface structural damage
+in a subsidence trough is caused by horizontal strains.When there is differential
+drainagesytemthowfcrackstgravityowfliquidiniplinesand
+gradeofhighwaysorrailroad bedsDifferential setlementwillalsoinduce tiltingof
+tall buildings, towers,and chimneys and cause instability.
+12.3.2 Terminologies of Subsidence Profile
+(i)Point of inflection: The point that divides the concave and convex portions of the
+subsidence proflecurveistermedasinfctionoint.At theinfectionointubsidenceishaf
+of the maximum subsidence value at thecentre,the surface slopeis maximum,the curvature
+is zero and the horizontal strain is zero.The location of the inflection point depends on the
+size ofopening orgoaf orrock types.When the opening isvery small as compared to depth
+it is located beyond the edges of the opening on the solid coal side.As the opening grows in
+size,theinfectionointmovesinsidethdgesof theopeningFor suercriticalcondiion
+infection will be inside the edges of theopening as shown inFigure12.4The distance from the
+infectionpont tothenearestedgeof theopeningisthetemedasfsetofthenfectionpoint.
+
+===== PDF PAGE 6 =====
+
+350Fundamentals and Applications ofRockMechanics
+)
+th
+Infection
+point
+Slope
+Horizontal displacement
+Subsidence
+-Horizontal strain
+of draw dependon:
+.Depth
+.Seam thickness
+strata above the coal seam.
+(il Angle of critical deformation (b):The angle between the vertical line at the opening
+edge and the line connecting the opening edge and the point of critical deformation on the
+surfaceistheangleofcritical deformation.Thecritical deformationis defined basedonthe
+structuralresistance to subsidence or horizontal strain.For example,ifa structure on the surface
+is designed to withstand a certain amount of deformation or strain,it is obvious that angle
+ofcritical deformation of the structure will be less than angle of draw.The angle of critical
+deformation is on the average5° to 10° less than the corresponding angle of draw.
+iv)Angle of break(n):On anymajor cross-section, the angle between the vertical line at
+the opening edge and the line connecting the opening edge and the point of maximum tensile
+strainon thesurfaceiscalled theangleofbreak.The ground surfaceat the pointofmaximum
+tensile strain is themost likely place where tensile cracks occur.
+
+===== PDF PAGE 7 =====
+
+Subsidence 351
+Smax=amcosα
+(12.3)
+The maximum subsidence and profle thereof also depend on the width to depth ratio of
+alongwall panel.As shown in Figure12.5,thewidth and depth have substantial effct on
+the suface subsidence.The width to depthratio for which there isno susidence,the ratio
+is called non-effectivewidth NEW).Thenon-effective width to depth ratio is found to vary
+figure showsthatforparticularW/Hratio themaximum susidence is the samealthough the
+area of influence will be more for greater depth for same angle of draw.Mathematically,it
+can be expressed asfollows:
+W=W;+2H,tan8
+(12.4)
+In general,three types of surface subsidence canbe expected based on length and width
+of longwall paneloverburdenstrata and depthof the seamheyareexplainedasfollows:
+(iCritical area:An area ofworking just sufficient tocausethemaximumpossible subsidence
+aatoneintntesufaceTogetamaximumsubsidenceat thcentreofthepanelth
+
+===== PDF PAGE 8 =====
+
+352Fundamentals and Applications of RockMechanics
+W
+W
+W
+H2
+H
+W
+FIGURE12.5Effct of widthtodepthratioonsurface subsidence.
+in Chapter 8.Hence,critical width （W)[Figure 12.6（a)] equals to
+(12.5)
+W=2Htanβ
+less than maxIn this case,width toheight ratio is such thatWW[Figure12.6（b）].
+shows that in this case,width to depth ratio will be high and hence,W>W
+Estimation ofFactor(a)
+Subide
+dimensinandtimedurationhisfactorcanbestmatedforcavinglongwallpanelasPeng99）
+a=0.35+0.5P
+(12.6)
+wherePis the combined strata properties and are calculated as:
+E(Qh)²
+=
+(12.7)
+(h,）²
+/=]
+wherehisththikessftstrataandcrrpndtthecoffcentfstraumro
+as given inTable 12.1This table also shows therock type and uniaxial compressive strength
+
+===== PDF PAGE 9 =====
+
+Ground surf
+Subsidence
+353
+C
+16
+Rib
+Rib
+Rib
+W
+Rib
+(a)
+W
+Super-criticalwidth
+W>W
+(b)
+C,
+Rib
+Ribpillar
+W
+Sub-criticalwidth
+W<W
+(c)
+Pariseau,2007).
+TABLE12.1
+RockFactorQforDifferent Rock Types(Peng,1992)
+Hardness
+Sandstone
+Limestone
+Shale
+Coal
+Clay
+Oc
+>88
+>86
+>69
+>27
+>18
+Extremely
+hard
+0.00
+0.01
+0.20
+0.80
+0.85
+78-88
+76-86
+58-69
+24-27
+15-18
+Very hard
+0.02
+0.02
+0.30
+0.83
+0.87
+69-78
+68-86
+44-58
+20-24
+13-16
+Hard
+Oc
+0.05
+0.06
+0.40
+0.87
+0.89
+58-69
+57-68
+29-44
+17-20
+12-14
+Regular
+Oc
+0.10
+0.12
+0.60
+0.90
+0.92
+48-57
+19-29
+10-17
+7-12
+Soft
+Oc
+48-58
+0.22
+0.7
+0.93
+0.95
+Q
+0.2
+39-48
+10-19
+7-10
+3-7
+Very soft
+Oc
+44-48
+0.40
+0.80
+0.97
+1.00
+0.30
+<10
+<7
+<3(400)
+<44
+<39
+Extremely soft
+Oc
+0.90
+1.00
+1.00
+0.40
+0.80
+:Uniaxial cmpresve strengthMPa;QAssigedrockfactr.
+
+===== PDF PAGE 10 =====
+
+354FundamentalsandApplicationsof RockMechanics
+WW2
+(12.8)
+VwW
+if the depth of the mine,H is known.
+37
+2.5
+2-
+三
+0.5-
++0
+0.6
+0.7
+0.8
+0.9
+0.4
+0.5
+Subsidence factor(a)
+FIGURE.Relatonhipbwerial widhan suidefctor adtedfmng9
+Critical widthcanalsobebtaindbydentifyingrockmassfactorasdfined inTabl.
+and usingEq.12.9(Saxena,2003).
+W=(2-M)H
+(12.9)
+TABLE 12.2 Rock Mass Factor Based on Condition Roof Strata
+Sl.no.
+Natureofstrata
+Rockmassfactor
+(M)
+Totally disturbed roof strata(asincase of thick seammining)
+1.0
+2.
+Partially disturbedroof strata with thickness of intactstrata beingless
+0.9
+than fivetimes the seam thickness under extraction
+Partiallydisturbedroof stratawith thicknessofintact stratabeingmore
+0.8
+than five times the seam thicknessunder extraction
+Naturallyweakanddisturbedroof stratahavingclay,shalermudstone)
+0.7
+Roof stratahavinginterbedded layers of sandstones and shales
+0.6
+Roof stratahaving predominantly sandstonebeds
+0.5
+
+===== PDF PAGE 11 =====
+
+Subsidence
+355
+EXAMPLE12.1
+Rock type
+Hardness
+Thickness(m)
+Clay
+Regular
+Shale
+12
+Hard
+Sandstone
+10
+Veryhard
+Sandy shale
+35
+Hard
+Shale
+15
+Regular
+Sandstone
+12
+Sof
+15
+Shale
+Very Soft
+Coal
+2
+Hard
+4
+that panel?
+Rocktype
+Thickness(m)
+Hardness
+(h.Q)²
+(h)²
+Clay
+12
+Regular
+0.92
+121.882
+144
+Shale
+10
+Hard
+0.40
+16.000
+100
+Sandstone
+35
+Very hard
+0.02
+0.490
+1225
+Sandy shale
+15
+Hard
+0.06
+0.810
+225
+Shale
+12
+Regular
+0.60
+51.840
+144
+Sandstone
+15
+Soft
+0.20
+9.000
+225
+Shale
+2
+Very Soft
+0.80
+2.560
+4
+Coal
+4
+Hard
+0.87
+202.58
+2067
+From the above table,we estimate
+202.58
+x900x9010×0+0=10=
+2067
+Depth of coal seam is 101 m. Using Figure 12.7, we find W=222 m.
+100-86
+S=2.024
+=1.358m
+222
+HollaandBarclay2000publishedahandbookon subsidenceandproposedmethodsfor
+estimating maximum subsidence based onmining induced subsidence datain theNew South
+Walesutralhsubidencedtaandringgaphithsthdwetand
+from colleriesintheareabetween theIllawarra Escarpmentand theBurragorangValley
+
+===== PDF PAGE 12 =====
+
+356FundamentalsandApplications of RockMechanics
+en
+T
+conditions exist in the Southern Coalfield.
+oLongwall Non-longwall
+Single panel
+W
+0.7
+0.6
+Non-longwall
+0.5
+0.4-
+Longwall
+0.3
+0.2-
+P080080
+1.25
+1.50
+1.75
+2.00
+0.50
+0.75
+1.00
+0.25
+WIH
+12.4 METHODS OF PREDICTING SUBSIDENCE
+Thereareeveral teiqustopreditminingnducd sufacesubsidenceEachofthistchniqu
+asumed that themaximum possible surface subsidence cannot exceed the heightof extracted
+seam ormining heightFollowing are theixbasicmethodsforpredictionofmine subsidence:
+(i)Empirically derived relationship or graphical method
+(i)Analytical method
+(ii) Profle function
+(iv)Influence function
+(v)Physical models
+(vi)Numerical method
+12.4.1Empirical or Graphical Method
+TheserelationshipareestablishedfromobservedsufacesubsidencebehaviourTheerelationshi
+require suffciently largenumber ofobservations andcase studiesinorder to establishlevel
+
+===== PDF PAGE 13 =====
+
+Subsidence357
+(12.10a)
+u
+Emax=g
+(12.10b)
+H
+Vmax=
+(12.10c)
+12.4.2 Analytical Method
+functionrertvcmthiliitationurialdsarewadayfqutl
+adopted for analysesrelated to complex design problems asmentioned below.
+It israrely found thatanalytical solution canbe found forrockmechanics problems of
+(i)The boundary conditions cannot be described by simplemathematical functions
+(i) The governing partial differential equations arenon-linear
+(i) The problem domain is inhomogeneous
+(iv) The constitutive relations for the rock mass are non-linear
+(v)Insufficiently simple mathematical calculation
+12.4.3 Profile Function
+The profle function S=f(x),xbeing the distance either from infection point or from the
+centreof thpanelapprachestopreditmining subsidencehismethod isprobably t
+
+===== PDF PAGE 14 =====
+
+358Fundamentals andApplications of RockMechanics
+divided intotwo types:
+i)Use ofequations to define the profile in terms of mininggeometry
+(iUseof tableof datato define the profle in terms ofmininggeometry
+account.
+(i)Simple method can consider only depth
+(i)Advancedmethod can consider many parameters
+most commonly used profile functions:
+Functions based on transition point as origin as shown in Figure 12.9（a):
+(i)HyelifntinU:King anWhen,1957,Ward 95,Chy,196
+andChen,1981)
+For critical:
+S
+(12.11)
+2
+For subcritical:
+Smax
+n（x+W)
+tanh
+tanh
+(12.12)
+2
+R
+where,candnare arbitrary constants dpendingon the mine site.Generallyalue
+ofnis2.
+(i)Hyperbolic function (Poland:Knothe,1953)
+(
+Smax
+(12.13
+2
+
+===== PDF PAGE 15 =====
+
+Subsidence
+359
+S=Smaxexp
+(12.14)
+S=Smax exp
+(12.15)
+1958)
+For critical:
+(12.16)
+For suberitical:S= amax(n,n)/2
+sin2πx
+[1+cosπx]
+(12.17)
+2π
+seamn=norn depending on side of the panel.
+(哥[一1]
+S=Smax Sin2
+(12.18)
+Functions based on face centre origin as shown in Figure 12.9(b)
+(i) Polish profile function (Kowalczyk, 1968)
+S=Smaxexp（-mx²)
+(12.19)
+Smax ; C = Average roof bed lowering.
+wheren=
+R²C
+(iHungarian profile function (Martos,1958)
+(12.20)
+S=Smaxexp
+d=distance of transition point from panel centre
+(ii)Niederhofer'smethod (Niederhofer,1962)
+(12.21)
+
+===== PDF PAGE 16 =====
+
+360Fundamentals andApplicationsof RockMechanics
+(iv)Indian profile function (Kumar,Saxena and Singh,1983)
+nx2
+S=Smaxexp
+(12.22)
+For subcritical:
+S=Smaxexp
+(12.23)
+For critical:
+R
+R
+W
+M
+(a)
+(b)
+location of inflection point.
+Solution:Basedonthedata giveninExamle12.thefollowingplotisgeneratedtoesrib
+that themaximumvalue of subriticalsubsidenceisfound tobe1.798masopposedto1.358m
+as found by approximating using Eq.12.8.
+-o
+-0.2
+0.03
+-0.4
+0.025
+-0.6-
+istance
+-0.8
+0.02
+-1-
+(w/u
+bdi
+-1.2
+0.015
+-1.4-
+Subsidence
+Slope
+-1.6-
+Infection point
+0.01
+-1.8-
+-Slope
+-2
+0.005
+-60
+40
+-20
+0
+20
+40
+60
+80
+-2
+Distance(m)
+100
+120
+
+===== PDF PAGE 17 =====
+
+Subsidence
+361
+S(-W/2)=2×S（d)
+tanh
+2（d+W)
+R
+tanh
+2d
+tanh
+W
+R
+R
+Q
+dUy
+(i)thring
+dA zone
+np
+dU:
+(i-1)thring
+H
+Excavatedpanel
+(b)
+(a)
+at point P due to excavation of element dA.
+
+===== PDF PAGE 18 =====
+
+362Fundamentals and Applications of RockMechanics
+value andformofsubsidence
+the arbitrary constants.
+work.
+to apply than profile functions and much more dificult to check and calibrate.
+Influence Functions and Weight Factors
+excavation gives no subsidence atP.
+Inordertdetmineweightfactorofa sectorfrstaninuncefuntonsuitablet
+mine siteneedstobeassumed.There aremanykindsofifuencefunctionsthey areithr
+derived empirically or are based on theoretical assumptions.Following are some of themost
+commonly used influence functions:
+(i) Stochastic influence function:
+=（4）Φ
+πr
+R²
+-exp
+(12.24)
+R²
+where,R= the radius of infuence circle, and r = the radial distance from point P.
+(i) Sann's infuence function:
+—=（4)Φ
+(12.25)
+
+===== PDF PAGE 19 =====
+
+Subsidence 363
+Φ(r)=4.6
+πR
+exp
+(12.26)
+Φ（）=
+H2COS5
+(12.27)
++nxp（/]
+=（)Φ
+(12.28)
+can alsobe applied forinclined seamororebody.Fordetailed studyof thisinfuence
+function and its applicability,refer to the abovementioned reference.
+S={Φ（r)rdrda
+(12.29)
+where A; represents the area of ith annulus or ring. For example, S for Stochastic infuence
+functioncanbederivedas
+-（πr²1R²)
+-（xr1R²)
+rdrda=
+da
+(12.30)
+S=
+rdr
+R²
+R2
+=exp
+In general,10rings and64sectorsorelements perringora totalof640 sectors provide
+reasonably good estimate of weight factor (Ren et al.,1987）.In the calculation of weighting
+factors,thevalue of S1 in Eq.12.31.
+(12.31)
+S={Φ(r)rdrda
+
+===== PDF PAGE 20 =====
+
+TECHNICALS
+364Fundamentals andApplicationsof RockMechanics
+subsidence at gridpointPwill be
+(12.32)
+(=1n=1
+inside the sector and Ais the area of the sector.
+TABLE12.3Valueof S,forith Ring for StochasticFunction
+Ring,i
+2
+4
+5
+6
+7
+8
+9
+10
+S;
+Horizontal Displacement and Strain
+Let us consider Figure 1210 againAume that a vertical subsidencehas occurred at gid
+pointPduetoextractionofanlement dAinundergroundhcentroidofdAprojectedonh
+surfacemarks the point Q.Let us assume that the element dA lies inside any of the sectorsof
+the influenced circleof grid point P.Then the displacement vector dUat grid pointPhas two
+componentsviz.(ivertical component dUobtained by the weightfactor,and (ihorizontal
+component dUy in x-y plane measured as given by Eq.12.33.
+dUxy=dUtanα
+(12.33)
+whereais the angle between thevertical and the line joining the element centroid to the grid
+point P on the surface. It can be measured as:
+tanα=PQ/H
+(12.34)
+Itmay benoted that if the circular area fully encompasses the extraction panel,then
+horizontal displacement at grid pointPwill bezero.The total horizontal movement at point 
+is again the sum of all extracted elements as U =≥dU,where N=number of sectors i
+the infuenced zone of grid point PTheresultant dUy can beresolved inxandydirectionsas
+N
+dUx=dUxcosβ
+(12.35a
+dUy=dUy sinβ
+(12.35
+
+===== PDF PAGE 21 =====
+
+Subsidence365
+movements.
+200-
+200-
+200-
+200-
+120-
+Distance(
+100-
+P（120.80）
+80-
+09
+40-
+20-
+Excavatedzone
+0-
+0
+20
+40
+60
+80
+100
+120
+140
+160
+180200
+Distance(m)
+the other results considering $max = 1.0m.
+y(m)
+(x-xp）/PQ
+(y-yp）/PQ
+dUx（m)
+dU,(m)
+(u)n
+PQ/H
+dUxy（m)
+x(m)
+Sector
+114.701
+-0.70711
+0.70711
+-0.00056
+0.00056
+0.00161
+0.4907
+0.000789
+85.299
+A
+98.718
+65.098
+-0.81915
+-0.57357
+-0.00092-0.00065
+B
+0.00433
+0.2598
+0.001124
+EXAMPLE 12.4 A section of depillaring panel is shown in the figure given below.Pillar
+and gallery widths are 25m and5mrespectively.Assuming the depth of the seam is 50m
+andangfrawi5lotthufaceusideneandrizontadisacment alon
+lines A-A',B-B'and C-C'
+
+===== PDF PAGE 22 =====
+
+TECHNICALSPE
+366Fundamentals andApplications of RockMechanics
+B
+Gallery
+Depillared
+horizontal displacements inxandydirections are determined asgivenbelow.
+Distance(m)
+70
+80
+90100110120
+-30-20-100
+102030405060
+-0
+L
+-0.1
+-Z0-
+-0.3-
+-0.4-
+-0.5-
+0.7
+-80-
+LineB-B
+-0.9-
+LineA-A'
+LineC'
+0.08
+0.06-
+-Line B-B
+LineA-A'
+0.04
+Line C-C'
+0.02
+0
+-30
+-20-10010203040
+708090100110120
+0.02
+0.04
+Distance (m)
+-0.06-
+-0.08
+
+===== PDF PAGE 23 =====
+
+Subsidence 367
+120
+100
+80
+60
+40Y（m）
+20
+100
+80
+DU
+20
+X(m)
+20
+20
+20
+(See Plate 12)
+12.4.5 Physical Model
+themixing stage of model construction.
+and the processis omewhat cumbersomeThuse of physicalmodels hasdeclined greatly in
+recent years, due to:
+(i)Theirhighcost and labour intensivenatureespeciallywhere everalvariationsof the
+rock properties and loading conditions are required
+(i) The increasing capability of computer based numerical models to include the above-
+mentioned features,andtoshow theseeffectsvisuallybycomputer graphics
+(i The materials usually designed with scaled elastic properties may notrealistically
+model and non-linear inelastic behaviour of actual rock mass
+12.4.6Numerical Method
+
+===== PDF PAGE 24 =====
+
+368Fundamentals andApplicationsof RockMechanics
+are assumed with scale down geometries.
+12.5 SINKHOLE SUBSIDENCE
+tal19）985aintalrtd thatoughandihltubsi
+occurred in Illinois (Whittaker et al.,1989) over shallow depth room and pillarmines.After
+extensiveudfsuacesubdenthraytlmmentdthat tstprvl
+subsidence featuresoverabandonedmined land are inkholes,withdepthof inkholemore
+than3f,and trough or sagsless than3ftPeng,1992）.After studying subsidence incidents
+inGermanyKratzschcommented that suddencave-ins andirregular depressionsntheformof
+sinkholesovernear-surfaceabandonedminespossessaseriousriskto thepopulated areanearby
+(Kratzsch, 1983）. His study also suggests that size of the affected area must be established
+basedon statistical investigations,taking into account type ofworkings,strength and thickness
+ofrooffuctuationofgroundwaterandothers.nKoreamorethan300coalmineshavebeen
+abandonedcoaineufcuideneproblmabenmingtthubl
+beemphasised forvaluating the sufacesusidencecoalmine areaand theeparamr
+shouldeetwitaingnextrawighforealistianalyinaditntinklt
+
+===== PDF PAGE 25 =====
+
+Subsidence
+369
+(a)
+(b)
+(d)
+(c)
+FIGURE12.（aAcircularshapesinkholeofradiusDfmedata4wayunction,b）Initialcollape
+ofmineroof,（c）Progressive development ofroof collapse,and（d）Caved rocks fills
+completely the void space (adapted from Whittaker and Reddish,1989).
+12.5.1VolumetricCalculations
+In this studysinkholeis assumed tobecylindrical shapeallthroughitslength.Considering
+
+===== PDF PAGE 26 =====
+
+370Fansdnmenals wnidAppllcations of RockMechanics
+世l1989）
+KzRD?
+(12.36)
+4(1/2wm²cot@)+mw²+zπD²
+[2wm²cot+mw²]
+(12.37)
+（K-1）πD²
+FIGURE 12.12 Caved rocks flled collapsed chimney.
+H(K-1)
+(12.38)
+πD2
+Ground depression isrepresented by a positive or negative value of d only if >=H.A
+positivevalerepresentsgrounddepressionbelowthesufacelevel.Anegativedvalue signifes
+that the sinkhole hasreached on the surface andvoid spaceis completely filled by broken
+rocks.Thevalue of d will be null if z<H.
+H
+FIGURE 12.13 Depth of ground depression for z>H.
+
+===== PDF PAGE 27 =====
+
+Subsidence371
+2mcot
+W
+(12.39)
+s（Figure 12.14)
+Apace=mw[1+r]+A=mw
+2mcot
+W
+(12.40)
+mw+2mcot
+D(K-1)
+(12.41)
+FIGURE 12.14 Two dimensional approximation of sinkhole formation.
+As beforef the collapsed chimneyreachesto the surface,avertical ground depressionis
+developed and it is estimated as:
+mw+2m²cot
+H(K-1)
+(12.42)
+D
+EXAMPLE 12.5A chimney cave forms over a square excavation of side6m andheight3m.
+The cavedzone forms aninscribedcircular cros-section.If thebulkingfactoris1.2and angle
+of repose of broken material is40,howhighwill cave zone extend above the excavation？
+Solution:Based on Eq.12.37, we estimate theheight as:
+4
+[2wm²cotΦ+mw²]= 251.94m
+Z=
+(K-1)πD²
+
+===== PDF PAGE 28 =====
+
+C
+Subsidence371
+2mcot
+W
+(12.39)
+s(Figure12.14)
+Apace=mw[1+r]+A=mw
+2mcot
+W
+zD
+(12.40)
+mw+2m²cot
+Z=
+D(K-1)
+(12.41)
+FIGURE 12.14 Two dimensional approximation of sinkhole formation.
+As beforef thcollapsedchmneyreachestothesurfaceaertical ground dpressonis
+developed and it is estimated as:
+mw+2m²cot
+H(K-1)
+(12.42)
+D
+EXAMPLE12.5A chimney cave forms overa square excavation of side6m and height 3m.
+Thecavedzoneforms aninscribedcircularcross-section.If thebulking factoris1.2andangle
+of repose of brokenmaterial is40°howhighwill cavezone extend above the excavation？
+Solution:Based on Eq.12.37,we estimate the height as:
+[2wm²cotΦ+mw²]=251.94m
+(K-1)πD²

@@ -1,0 +1,802 @@
+
+
+===== PDF PAGE 1 =====
+
+Prediction of Surface Subsidence and
+Strain over Inclined Seam using Influence
+Function Method
+Project-IV(Mi57002)report submitted to
+Indian Institute of TechnologyKharagpur in
+partialfulfilment forthe award of the degreeof
+Dual Degree(B.Tech +M.Tech)
+in
+Mining Engineering
+By
+Ayan Ahmed
+[21MI31007]
+Under the Supervision of
+Professor Debasis Deb
+h h业
+Department Of MiningEngineering
+Indian Instituteof TechnologyKharagpur
+SpringSemester,2025-26
+May1,2026
+
+===== PDF PAGE 2 =====
+
+Declaration
+Ihereby declare that the work contained in this report titled “Prediction of Surface
+Subsidence and Strain over Inclined Seam Using Influence Function Method” has been
+carried outbyme under the supervision of ProfessorDebasis Deb,Departmentof Mining
+Engineering,Indian Institute of TechnologyKharagpur.
+Ifurtherdeclarethat:
+(a)Thework reported in this thesis is the result ofmy own independentresearch and has
+notbeen submitted to anyother Institute orUniversity forthe awardof any degree or
+diploma.
+(b) I have abided by thenorms and guidelinesprescribed in the Ethical Code of Conduct of
+the Institute.
+(c)WhereverIhaveusedmaterials（data,theoreticalformulations,figures,andtext)from
+other sources,lhave duly acknowledged them through citations andreferences.
+(d) Permission from thecopyright holders hasbeen obtained wherever necessary.
+Date:01.05.2026
+Place:IITKharagpur
+AyAhne
+Ayan Ahmed
+RollNo.:21MI31007
+
+===== PDF PAGE 3 =====
+
+Certificate
+This is to certify that the thesis report entitled Prediction of Surface Subsidence and
+Strain over Inclined Seam Using Influence Function Method” submitted by Ayan
+Ahmed (RollNo.21Mi31007)to the Indian Institute of Technology Kharagpur in partial
+fulfiment of therequirementsforthe award of thedegreeofBachelorofTechnology&
+Master of Technology inMining Engineering,isarecord ofbona fideresearchwork
+carried out by him undermy supervision and guidance during the academic year 2025
+26.
+To thebestofmyknowledge,theworkreportedhereinsriginaland hasnotbeen
+submitted to any otherUniversityor Institute forthe award ofanydegree or diploma.
+Professor Debasis Deb
+Department of MiningEngineering
+Indian Institute of TechnologyKharagpur
+Kharagpur-721302,India
+Date:01.05.2026
+Place:lIT Kharagpur
+
+===== PDF PAGE 4 =====
+
+Abstract
+Subsidence prediction playsa crucialroleinthe safe planning and sustainableexecution
+empiricaland profile-function methodsare often limited in their generalizability across
+varying geological conditionsand seam configurations.In this work,a comprehensive
+study was carried out on the Influence Function Method (IFM) and the Stochastic
+coalextraction.
+The theoretical framework of subsidence and probabilistic influence functionswas
+Rock Mechanics by Professor Debasis Deb and Professor Abhiram Kumar Verma.
+capable of computing subsidence at allaffected surface points fora flat coal seam,
+successfullyreproducing standard subsidence profiles consistent with established theory.
+Buildingupon thisfoundation,the studywas extended to inclined seam(<12°)
+geometries.Anovelmathematical formulationbased on the stochasticinfluence function
+frameworkwasdeveloped topredictsubsidence over inclinedseamsbyincorporating
+geometrictransformationoftheinfluencezone,therebycapturingtheinherentasymmetry
+of subsidence troughs.The proposed model was validated againstreal longwall
+results.
+In thepresentwork,thesetheoreticalandcomputationaladvancementshavebeenfurther
+translated into a comprehensivesoftwaretool.Thedevelopedplatform allows usersto
+directlyinputfielddimensions,seamorientation,seamgeometry,andgeomechanical
+properties,and subsequentlyvisualize displacementcomponentsx,y,)and strain
+components(Ex,Ey)across the surface.Additionally,the softwareenablescustomized
+profileplottingalonguser-defined linesfacilitatingdetailed subsidenceanalysisand
+interpretation.
+Thisresearch thus contributes both theoretical and practicaladvancementsby providinga
+generalized anduser-friendlyapproachforsubsidencepredictioninflataswellasinclined
+seams.The developed methodologyand software have significant applications in
+subsidenceriskssementufaceinfrastructureprotctonandeficien
+planning.
+
+===== PDF PAGE 5 =====
+
+Acknowledgements
+lexpresmydeest ensfratitudtmythesisurvisrrofssorbasis
+DepartmentofiningEngineeringharagpur,orhiconstantguidance
+encouragement,and insightful suggestions throughout thisresearch work.His expertise in
+rockmechanics and numericalmodeling hasbeen invaluablein shaping the direction and
+outcomeofthisstudy.
+I am also thankful to all faculty members and staff of the Department of Mining
+essential for the successful completion of this work. I sincerely acknowledge the
+assistancereceived from myfellowresearch scholars andpeersfortheir constructive
+discussionsand feedback.
+Finally,amgratefultomyparentsandfamilyfortheirunwaveringsupport,patience,nd
+
+===== PDF PAGE 6 =====
+
+LIST OF FIGURES
+5
+.8
+6
+Figure 6 Inclined seam geometry in the original (x-y-z) coordinate system...
+.9
+..10
+Chapter 4-Case Study:Adriyala Mine
+Figure8Surfaceplan of theAdriyalaLongwallPanel-1 showingmonitoring layout.
+15
+Figure9 Discretised computational grid overlaid on the Adriyala panel...
+16
+Figure10Fittedvmeasured subsidence alongmonitoring lineS11S58(training dataset..16
+Figure 11 Predicted vs.measured subsidence alongmonitoringline S61-S99 (testing dataset）.17
+Figure 12 Colour-mapped vertical subsidence (Uz) field over the Adriyala panel...
+...18
+Figure 13 Colour-mapped Y-strain (Ey)field over the Adriyala pane....
+..18
+Figure 14 Colour-mapped X-strain(Ex) field over the Adriyala panel.
+19
+
+===== PDF PAGE 7 =====
+
+LIST OF TABLES
+Chapter3-Computational Implementation
+Table3.1 Input parameters and their descriptions in the developed software platform..
+Table3.2 Goveming equations used for displacement and strain computation...
+11
+.13
+Chapter4-Case Study:Adriyala Mine
+Table4.1 Geomechanical and geometric properties of the Adriyala Longwall Panel-1..
+..15
+Table4.2Numerical modelinput parametersused for theAdriyalamine simulation...
+*...16
+Table43RMSE comparisonbetween predicted and observed subsidence(training&testing).17
+
+===== PDF PAGE 8 =====
+
+LIST OF ABBREVIATIONS
+Methods and Techniques
+InfluenceFunction Method
+IFM
+—StochasticInfluence Function Method
+SIFM
+—Finite Element Method
+FEM
+-Boundary Element Method
+BEM
+-Root Mean SquareError
+RMSE
+Tableof Contents
+TOC
+Variables and Symbols
+-Horizontal displacement in the x-direction(m)
+Ux
+Horizontal displacement in the y-direction（m)
+Uy
+Vertical displacement/ subsidence（m)
+UZ
+Horizontal strain in the x-direction
+Ex
+Ey
+Horizontal strain in the y-direction
+Radius of influence (m)
+Rf
+Depth of seam below ground surface(m)
+H
+Angle of draw/influence angle(degrees)
+β
+Half-angle between vertical and edge of influence zone(degrees)
+θ
+Anglebetweenverticaland linejoining elementcentroid to surface point
+Smax
+Maximum subsidlence factor(m)
+Subsidence factorused asmodel calibrationparameter
+P
+Influence parameter:a=H tanβ
+a
+e(r)
+Stochasticinfluence function
+dA
+Infinitesimal extracted area element(m2)
+ns
+Unit normal vectorto the seam plane（nx,ny,nz)
+dx,dy
+Grid resolution in x andy directions（m)
+Organisations and Locations
+IITKGP
+—Indian Institute of TechnologyKharagpur
+SCCL
+Singareni Collieries Company Limited
+DGMS
+Directorate General of MinesSafety,India
+A4
+ISO216standard paper size（210mmx297mm)
+
+===== PDF PAGE 9 =====
+
+TABLE OF CONTENTS
+Preliminary Pages
+Declaration......
+Certificate.....
+Abstrac......
+Acknowledgements..
+List of Figures..
+List of Tables......
+List of Abbreviations.
+Chapter1 Introduction..
+1.3Project Motivation and Scope.
+1.4 Thesis Structure....
+Chapter 2 Background and Liteiature Review.
+2.1 Background of Subsidence.
+2.2 Prediction Approaches.
+2.3 Influence Function Method (IFM).
+2.4 Influence Functions...
+2.5 Horizontal Displacement and Strain.
+2.6 Subsidence Prediction for Inclined Seam.
+Chapter 3 Computational Implementation..
+11
+3.1Input Structure.
+11
+12
+3.2 Grid Generation...
+12
+3.3 Subsidence Calculation Routine.
+13
+3.4 Strain Calculation....
+14
+3.5Output andVisualization...
+14
+3.6 Computational Performance.
+Chapter 4 Case Study:Adriyala Mine...
+15
+15
+4.1 Description of the Adriyala Mine.
+16
+4.2 Input Parameters Used in Numerical Model.
+16
+4.3 Actual Subsidence Data vsModel Predictions.
+19
+4.4 Interpretation of Case Study..
+20
+Results and Discussion..
+22
+Conclusion...
+23
+References....
+25
+
+===== PDF PAGE 10 =====
+
+Chapter 1:Introduction
+1.1 Overview of Subsidence in Rock Mechanics
+subsidence occurs.
+1.2 The Problem of Mining-Induced Subsidence
+is initiated by the caving of the immediate andmainroof strata above the excavated zone.
+Thisprocesscauses are-adjustmentof theoverburden,leadingtoverticalmovementon the
+surface.The surface manifestation of subsidence takes the form of a subsidence basin.
+The critical importance of studying and predicting subsidence lies in thepotentialfor
+damagetosurfacestructures,underground utilities,and the disruptionofnaturaldrainage
+systems.Damage to surface structures isprimarily caused by differential settlement and
+the resultinghorizontal strains(compression and tension) along the subsidence trough.
+Accurateprediction of thesubsidenceprofile（vertical displacement,slope,curvature,and
+horizontal strain) is essential for effective surfaceprotection and mine planning.
+1.3Project Motivation and Scope
+Traditionalmethodsforpredictingmining-induced subsidencesuchas theInfluence
+Functionethodhavebeendeveloped and successfullyapliedoftenwithin thecontxt
+
+===== PDF PAGE 11 =====
+
+potentially inaccurate.
+1.4Thesis Structure
+This thesis consists of sixparts:
+Chapter1-Introduction
+Chapter2-Background and LiteratureReview
+method,and extension of the concept to inclined seams (<12°).
+Chapter3-Computational Implementation
+Describes C++ computational engine and software platform for subsidence,
+displacementstancaulatonnutandingandvisualizatnwithuedfind
+profileplotting.
+Chapter4-CaseStudy
+Applies the developed model to the Adriyala mine and comparespredicted
+subsidencewith actual monitored data.
+Results and Discussion
+Interprets the results,explains accuracy and deviationsbetween actual and
+predicted subsidence.
+Conclusion and Learning Outcomes &Future Scope and References Summarises
+majorfindings,learningoutcomes,and suggests extensionsof theresearch such as
+modelling steep seams andmultiple-seam extraction.
+
+===== PDF PAGE 12 =====
+
+Chapter 2: Background and Literature Review
+2.1Background of Subsidence
+surface structures,reduce hazards,and optimizeminedesign.
+2.2 Prediction Approaches
+Several approaches have been developed to predict mining-induced subsidence:
+Empirical methods:Based on field observations and regional case histories.
+Analytical methods:Derive subsidence usingmathematicalmodels,such as the
+Influence Function Method (IFM).
+Numericalmethods:Applyfiniteelement,boundaryelement,orhybridmodelsfor
+detailed simulations.
+Among these,theInfluence FunctionMethod iswidelyused becauseof itsbalance
+between simplicity and accuracy.
+2.3Influence Function Method (IFM)
+
+===== PDF PAGE 13 =====
+
+bord and pillar panel.
+Figure1
+A typical influence function would look at annular zones around a point and use equations
+to relate the percentage extraction in each area to the subsidence of that point.The area
+of influence is generally assumed to be circular in shape,although hexagonal shapes
+have been employed occasionally.The functions commonly used can be subdivided as
+follows:
+Empirically derived functions which use arbitrary constants to produce the desired
+valueandform ofsubsidence
+)
+the arbitrary constants
+calibration work.
+
+===== PDF PAGE 14 =====
+
+2.4InfluenceFunctions
+gid centre is denoted by Pand hence,theradius of the infuence circle is to be taken as
+and the line connecting the grid point and end of the influence area.The sector which
+falls inside the excavation area will give rise to subsidence at the grid point P, depending
+on the weight factor of that sector,and the sector which falls outside the excavation gives
+nosubsidenceatP.
+Figure2
+
+===== PDF PAGE 15 =====
+
+influence function:
+R3
+exp
+R
+Equation1
+2.5 Horizontal Displacement and Strain
+any of the sectors of the influenced circle of grid point P.Then the displacement vector
+dU at grid point P has two components viz.(i) vertical component dUz obtained by the
+weight factor,and (ihorizontal component dUxy inx-y plane measured as given by
+Equation2.
+dUxy=dUz tan a
+Equation2
+where a is the anglebetween the vertical and the line joining the element centroid to the
+grid point P on the surface. It canbe measured as:
+tana=PQ/H
+Equation3
+Itmay benoted that if the circular area fullyencompasses the extraction panel,then
+and y directions as:
+
+===== PDF PAGE 16 =====
+
+dUx=dUxycosβ
+Equation4a
+dUy=dUxy sinβ
+Equation4b
+horizontal movements.
+uniform mining depth acrossthe entire panel and therefore yields a symmetric
+subsidence troughfor flat seamsHoweverin thecaseof aninclined coal seam,the
+extraction depth isno longer constant-surface points located above the up-dip sideof the
+seam areinfluencedbyashallower excavationdepth,whilepointsabovethedowndp
+side correspond to deeper extraction.Thisspatialvariation in depth directly alters the
+influenceradius and intensity of strata disturbance transmitted to the surface,leadingto
+anasymmetric subsidence trough that cannot be captured bythe standard flat-seam
+formulation.To extend the mathematicalmodel to inclinedseams,thepresentwork retains
+the same influence function and same theoretical basis,butintroduces a
+transformation that expresses the seam depth as a function of position along the dip
+direction.Bymodifying only the geometric input-rather than replacing the influence
+function itself-the subsidence computation remainsfully compatiblewith the original
+SIFM frameworkwhileaccuratelyaccountingforthechangingdepthalongtheseam
+inclinationThisapproachenablesthepredictionof subsidenceoverbothflat and inclined
+seams within a single unified modelling structure.
+
+===== PDF PAGE 17 =====
+
+Figure3
+GroundSurfac
+Figure4
+In the conventional Influence FunctionMethod forflat seams,theoverburden isassumed
+to subside symmetricallyabout the extracted panel because the depth from the seam to
+the surface remains constant across the entire panel.As illustrated in Figure 3,the
+influence lines originating from the seamboundaries rise vertically and intersect the
+surface atidentical anglesβ,resultingin a symmetrical subsidence trough and a centrally
+locatedpeaksettlement.However,when thecoal seam is inclined,thedepthvariesalong
+the dip direction,and consequentlythe angles atwhichstrata movementpropagates
+toward the surface become unequal.Figure4 demonstratesthis condition:on theup-dip
+side the seam liescloser tothe surface,causinga shorterinfluencepath and a steeper
+convergence,whileon the down-dip side the greater depth leads toa wider influence
+spreadbeforereaching the surface.This geometricimbalance shifts thezone ofmaximum
+subsidencetoward theshallower sideandproducesa skewedsettlementprofile,thereby
+invalidating the symmetricsubsidence assumption of the flat-seammodel.
+Figure5belowexplains stochastics influence function method in flat seam.
+8
+
+===== PDF PAGE 18 =====
+
+P(xy.H)
+du
+du
+A(0,0.0)
+Figure5
+exp
+π（x²+y²)/a2)
+dU:(x,y)=
+Smax
+dxdy.
+a2
+a=Htanβ.
+and Smax=Maximum subsidence value.
+Given,
+Equation5
+Through this du at Pcan be calculated due to infinitesimal small excavation at point A and
+thenbythat dUxand dUyusingequation2,3,4a and 4b.
+Now,theseam isdivided inmanyinfinitesimalsmallexcavation and dux,dUy and duz is
+calculated at everypoint on the ground surface dueto all infinitesimalsmallexcavation
+and then they are superposed toget the final Ux,Uy and Uzvalue atevery point.
+Now,wewill use this similaridea on inclined seam alsobutin a differentway.
+GroundSurface
+Seam
+Figure6
+
+===== PDF PAGE 19 =====
+
+P(x.y.H)
+Ground Surface
+A(0,0,0)
+Figure7
+flat seam.
+exp（-π（x²+y²)/a²)
+dxdy.
+dU=(x,y)
+a2
+a=Htanβ
+and Smax=Maximum subsidence value.
+Equation6
+Given,
+Through this dUx'and duy' at Pcan be calculated due to infinitesimal small excavation at
+pointAusingequation2,3,4aand4b.
+Now,the seam is divided in manyinfinitesimal small excavation and dux,duyand duz'is
+calculated at every pointonthe ground surfacedueto allinfinitesimalsmallexcavation and
+then theyare superposed to get thefinalx,yand zvalue at every point.
+changed the co-ordinate system (x-y-z) i Figure 6 to(x-y-z) in Figure 7.
+
+===== PDF PAGE 20 =====
+
+Chapter 3: Computational Implementation
+complex panel geometries.
+statisticammarisnractivaunctonandinedcrossectn
+plotting fordetailed subsidence analysis.
+4.1 Input Structure
+The softwarereplaces staticinput files with a structured graphicalinput system.Users
+provide the followingparameters through theinterface:
+Field andidparametersfedengthfld breadth,and grid resolutiondx,dy）
+Seam orientation and geometry:direction cosines(ns_x,ns_y,ns_z）and reference
+coordinates(x_ref,y_ref,z_ref)
+Seam properties:subsidence factor (p) and angle of draw(β)
+panels
+subsidence analysis.
+
+===== PDF PAGE 21 =====
+
+4.2 Grid Generation
+Field Length
+FieldBreadth
+dr.
+dy
+Equation7a and7b
+Pc=m·dc+
+da
+Py=n·dy
+dy
+2
+Pz=0
+2
+Equation8a,8band8c
+4.3Subsidence Calculation Routine
+The core computation is carried out in the function Calculate_Subsidence,which
+performs superposition of influence from each extracted element to every surface point.
+Foreach mined element:
+Its coordinates (xa,ya,za)are computed based on seam orientation.
+The distance to each surface point is decomposed into:
+onormal component(Depth) controllinginfluence strength o
+horizontal radial component (r) controlling lateral spread
+Theinfluence radiusRf is defined as:
+Rf=Depth·tan(B)
+Equation9
+
+===== PDF PAGE 22 =====
+
+using:
+2
+Equation 10
+displacement:
+（）
+Φ=Smnx
+·(dady)
+R.f2
+Equation11
+The computed displacements are cumulatively stored in displacementmatrices:
+Ux(m,n),Uy(m,n),Uz(m,n)
+4.4Strain Calculation
+numerically usingcentered finite difference operators:
+U（2+1,j)-U(i-1,j)
+E（i,j）=
+2dx
+Uy（i,5+1)-Uy(i,j-1)
+E,（i,5)=
+2dy
+Equation12aand12b
+13
+
+===== PDF PAGE 23 =====
+
+conditions.
+4.6 Computational Performance
+The algorithm scales with:
+O(NsxNg)
+where:
+Ns:number of mined grid elements
+Ng:number of surface grid points
+to:
+Loop optimization
+Cache-friendly vector containers
+Avoidance of expensive memory reallocation
+
+===== PDF PAGE 24 =====
+
+Chapter 4: Case Study: Adriyala Mine
+Mine in Adrial, Telangana,India.
+Seam Gradient= 1 in 5.5
+Height of Extraction = 3.50 m
+Monitoring stations:number spacing,measurement method
+Long WallPanel started on 15.10.2014 (Observation Period Started)
+Long Wall Panel Completed on 29.12.2016
+Long Wall Panel Sealed on 27.10.2017(Observation Period Ended)
+Figure8
+
+===== PDF PAGE 25 =====
+
+Figure9
+Grid resolution (dx,dy）=（10,10）
+=2310.00m andy1=120.00mtoy2=370.00m
+β:influence angle=20°
+6.3 Actual Subsidence Data vs Model Predictions
+0.2
+Mine Subsidence
+0.0015
+Fitted Subsidence
+0.0
+Estimated Strain
+0.0010
+-0.2
+0.0005
+()
+-0.4
+0.0000
+-0.6
+-0.0005
+-0.8
+-0.0010
+-1.0
+-0.0015
+-1.2
+-0.0020
+300
+400
+100
+200
+Distance along panel (m)along S11 to S58
+Figure10
+Fig.10.
+
+===== PDF PAGE 26 =====
+
+0.0
+Mine Subsidence
+-0.2
+PredictedSubsidence
+7
+EstimatedStrain
+0.0015
+-0.4
+E-0.6
+0.0010
+-0.8
+0.0005
+-1.0
+0.0000
+-1.2
+-0.0005
+-1.4
+-0.0010
+-1.6
+0.0015
+100
+200
+-0.0020
+Distance along panel(m)along S61to S99
+OO0
+400
+Figure11
+subsidencebehaviorof thestudied panelTheRMEforthetraningdatasetis
+approximatl.25mwhilethatforthetestingdatasetisabout.26mwithin subsidence
+ranges of1.25m and1.6m,respectively.Theseresuts indicate that the proposed model
+providesreliable and consistent predictions of both themagnitudeand spatialdistribution
+ofmining-induced subsidence.
+
+===== PDF PAGE 27 =====
+
+Ffeld:
+Uz-vertical subsidence
+Colormap:
+viridis
+-1.28e+0
+Grid:231x47|Spacing:1em x1em|Points:10857
+-1.89e-5
+min
+-1.277e+0
+max
+-1.894e-5
+mean
+aoppas
+-6.798e-1
+4.916e-1
+Figure12
+Field:
+Ey-Y strain
+Colormap:
+Viridis
+2.57e-3
+2.29e-3strain
+Grid:231x47|Spacing:10m x1em| Points:10857
+min
+max
+mean
+std dev
+2.290e-3
+-2.050e-4
+1.123e-3
+-2.565e-3
+Figure13
+
+===== PDF PAGE 28 =====
+
+Fleld:
+Uz -vertical subsidence
+color map:
+viridis
+-1.28e+0
+-1.89e-5
+min
+-1.277e+0
+max
+-1.894e-5
+mean
+std dev
+-6.798e-1
+4.916e-1
+Figure12
+Field:
+Ey-Y strain
+Color map:
+Viridis
+-2.57e-3
+2.29e-3
+uteuas
+Grid:231x47|Spacing:1emx1em 1Points:10857
+mean
+std dev
+min
+max
+2.290e-3
+-2.050e-4
+1.123e-3
+-2.565e-3
+Figure13
+
+===== PDF PAGE 29 =====
+
+Field:
+Ex-X strain
+Colormap:
+Viridis
+-9.31e-4
+9.21e-7strain
+min
+max
+9.206e-7
+mean
+std dev
+-9.310e-4
+-2.509e-5
+1.075e-4
+Figure14
+Figure2and4showsthepredictedvalueof,yandExofAdriyalainesbyth
+Model developed.
+6.4 Interpretation of Case Study
+Overall,theresult indicates that the proposed influence-based computational model
+performs reliably in predicting mining-induced surface subsidence over the Adriyala
+longwall panel. The predicted curves closely follow themeasured subsidence envelopes if
+noiseisremoved alongboth monitoring lines,successfullycapturing the locationof
+maximum settlementwidth of the troughand asymmetricdeformation trend caused
+by seam inclination.The comparatively smalldeviation between predicted and observed
+valuesarticularlyinthecentralregionof thepaneldemonstratsthat themodelprovid
+planning applications.
+
+===== PDF PAGE 30 =====
+
+Results and Discussion
+patterns were consistent across all monitoring sections.
+Althoughthepredictedcurveswereenerallysmooth,theactualmeasurementsexhibited
+localizedpikesanddipslkelyarising fromabrut ithologicalvariationsjointactivation
+caving irregularities, or surface measurement uncertainties.The influence function
+formulation assumes a continuum deformation behaviour and therefore does not explicitly
+simulate sudden point-level fluctuations.However,the deviation between the actual and
+predicted data remained small over most of the subsidence trough,indicating that the
+dominantmechanisms of strata movementwere accurately captured.
+The agreementbetween measured and predicted subsidence-particularly in termsof
+subsidence magnitude and basin width—demonstrates that the proposed extension of the
+Influence Function Method for inclined seams provides a credible and computationally
+efficient representation of field deformation behaviour. The ability of the model to
+generate realistic subsidence troughs without requiring multiple calibration constants
+furtherenforcesitsuitbiltyfmineesinsuidenceriskevaluationand
+extraction prediction studies.
+20
+
+===== PDF PAGE 31 =====
+
+Conclusion
+seams.
+2.The Stochastic Influence Function Method (SIFM) was implemented to
+incorporatevariability inoverburden behaviourwhile preserving analytical
+simplicity.
+3.A novel extension of the influence function concept was formulated to predict
+subsidenceforinclinedseamsbymodellingseamdepthasaspatialfunction
+along the dip direction rather thanmodifying the influence function itself.
+4.A complete C++computational tool was developed to evaluate vertical and
+horizontal displacement and strain over the ground surface using discretized
+influence superposition and a usefriendly software isdeveloped tovisualizethe
+data.
+5.Themodel wasvalidated using actual monitoringdata from theAdriyala longwall
+panel,showing strong agreementbetween predicted and observed subsidence
+behaviour and accurately capturing the asymmetric trough caused by seam dip.
+It is importantto note that the presentmodel is primarily applicableto moderately inclined
+seams-typically up to about 12where the geometric distortion of the influence field
+remains within a tractable rangeteeply inclined seams require further enhancements
+beyond the current formulation.
+21
+
+===== PDF PAGE 32 =====
+
+Learning Outcomes and Future Scope
+Learning Outcomes
+longwall mining.
+probability-based deformation fields.
+field-measured subsidence.
+influence surface deformation.
+Future Scope
+Although the proposed model provides reliable subsidence prediction for moderately
+inclined seams,several opportunities exist to extend thisresearchfurther.Some possible
+directions are:
+1.Prediction for steeply inclined seams(>12°):
+The presentformulation assumesmoderate seam inclination,wherethe
+deformation still propagates in apredictablegeometricmanner.For steep
+inclinations,the overburden movement becomes highly asymmetric and nonlinear.
+Extending the mathematical model to handle steep dips will significantly enhance
+its applicability in structurally disturbed coalfields.
+2. Multiple-seam and stacked-seam subsidence:
+22
+
+===== PDF PAGE 33 =====
+
+4.
+planning and environmental compliance.
+References
+1.Chen,Y.,Zha,J.and Wang,L,2025.Adaptive dynamicprediction model of mining
+subsidence aided by measured data.Scientific Reports,15(1),pp.1-15.
+2.Bahuguna,P.P.,Singh,B.,Srivastava,A.M.C.and Saxena,N.C.,1993.Semiempirical
+method for calculation of maximum subsidence in coal mines.Geotechnical & Geological
+Engineering,11(4),pp.249-261.
+3.Luo,Y.,2015.An improved influence function method for predicting subsidence caused
+by longwall mining operations in inclined coal seams.International Journal of Coal
+Science &Technology,2(3),pp.163-169.
+4.Xu,.uailak.an,Wuan,Yand3ufud
+Geotechnics,48,pp.134-145.
+119(1),pp.34-41.
+Learning Pvt.Ltd..
+23

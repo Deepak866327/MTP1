@@ -1,0 +1,10 @@
+.venv/
+.project_tools/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+outputs/
+docs/review/
+~$*
