@@ -11,7 +11,7 @@ from .solver import solve_flat
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Subsidence rebuild — geometry and flat-seam displacement.")
+    parser = argparse.ArgumentParser(description="Subsidence rebuild — geometry, flat displacement, strain and profiles.")
     commands = parser.add_subparsers(dest="command", required=True)
     validate = commands.add_parser("validate", help="Validate a version-1 project and physical geometry.")
     validate.add_argument("project", help="Path to project JSON.")
@@ -26,8 +26,35 @@ def main(argv=None) -> int:
     solve.add_argument("--source-chunk-size", type=int, default=2048)
     verify = commands.add_parser("verify-flat", help="Run synthetic acceptance checks and analytical convergence study.")
     verify.add_argument("--output", required=True, help="New or empty verification directory.")
+    deform = commands.add_parser("deform-flat", help="Calculate displacement, Ex/Ey and optional line profiles.")
+    deform.add_argument("project", help="Geometry project JSON.")
+    deform.add_argument("--model", required=True, help="Flat-model settings JSON.")
+    deform.add_argument("--profiles", help="Optional line-profile definitions JSON.")
+    deform.add_argument("--output", required=True, help="New or empty result directory.")
+    sample = commands.add_parser("sample-profiles", help="Sample saved displacements and derived Ex/Ey without rerunning the solver.")
+    sample.add_argument("run", help="Existing solve-flat or deform-flat output directory.")
+    sample.add_argument("--profiles", required=True, help="Line-profile definitions JSON.")
+    sample.add_argument("--output", required=True, help="New or empty profile directory.")
+    verify_deformation = commands.add_parser("verify-deformation", help="Verify strain derivatives and line interpolation.")
+    verify_deformation.add_argument("--output", required=True, help="New or empty verification directory.")
     args = parser.parse_args(argv)
     try:
+        if args.command == "verify-deformation":
+            from .phase3_verification import export_deformation_verification, run_deformation_verification
+            report = run_deformation_verification()
+            export_deformation_verification(report, args.output)
+            print(json.dumps({"passed": report["passed"], "output": args.output, "check_count": len(report["checks"])}, indent=2))
+            return 0 if report["passed"] else 1
+        if args.command == "sample-profiles":
+            from .deformation import horizontal_strain
+            from .phase3_results import export_profiles, load_grid_run
+            from .profiles import load_profiles, sample_profile
+            saved = load_grid_run(args.run)
+            strain = horizontal_strain(saved.surface, saved.displacement_m)
+            profiles = tuple(sample_profile(saved.surface, saved.displacement_m, strain, line) for line in load_profiles(args.profiles))
+            export_profiles(profiles, args.output, project=saved.project, model=saved.model, strain=strain, source_run=str(args.run))
+            print(json.dumps({"output": args.output, "profile_count": len(profiles), "sampling": "saved displacement grid; influence solver not rerun"}, indent=2))
+            return 0
         if args.command == "verify-flat":
             from .verification import export_flat_verification, run_flat_verification
             report = run_flat_verification()
@@ -49,13 +76,28 @@ def main(argv=None) -> int:
                 "corner_vertical_depth_range_m": summary["extraction_corner_vertical_depth_range_m"],
                 "status": summary["status"],
             }, indent=2))
-        else:
+        elif args.command == "solve-flat":
             from .results import export_displacements
             model = load_flat_model(args.model)
             surface = build_surface_grid(project)
             result = solve_flat(project, model, surface.xyz_m, observation_chunk_size=args.observation_chunk_size, source_chunk_size=args.source_chunk_size)
             summary = export_displacements(project, model, surface, result, args.output)
             print(json.dumps({"output": args.output, "source_count": summary["source_count"], "evaluation_point_count": summary["evaluation_point_count"], "peak_sampled_settlement_m": summary["peak_sampled_settlement_m"], "status": summary["status"]}, indent=2))
+        else:
+            from .deformation import horizontal_strain
+            from .phase3_results import export_deformation
+            from .profiles import load_profiles, sample_profile
+            model = load_flat_model(args.model)
+            surface = build_surface_grid(project)
+            # Check derivative feasibility before the potentially expensive solve.
+            from .grid_fields import surface_axes
+            surface_axes(surface, minimum_points=3)
+            result = solve_flat(project, model, surface.xyz_m)
+            strain = horizontal_strain(surface, result.displacement_m)
+            lines = load_profiles(args.profiles) if args.profiles else ()
+            profiles = tuple(sample_profile(surface, result.displacement_m, strain, line) for line in lines)
+            summary = export_deformation(project, model, surface, result, strain, args.output, profiles=profiles)
+            print(json.dumps({"output": args.output, "profile_count": len(profiles), "boundary_cell_count": summary["boundary_cell_count"], "status": summary["status"]}, indent=2))
     except (OSError, ValueError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 2

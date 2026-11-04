@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "units": {"length": "m"},
+  "profiles": [
+    {"name": "Panel center along x", "start_xy_m": [-450.0, 0.0], "end_xy_m": [450.0, 0.0], "sample_count": 181},
+    {"name": "Panel center along y", "start_xy_m": [0.0, -350.0], "end_xy_m": [0.0, 350.0], "sample_count": 141},
+    {"name": "Oblique profile (global strain components)", "start_xy_m": [-350.0, -250.0], "end_xy_m": [350.0, 250.0], "sample_count": 173}
+  ]
+}

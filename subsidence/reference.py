@@ -48,3 +48,23 @@ def analytical_flat_displacement(project: Project, model: FlatModel, xyz_m) -> n
         result[:, 1] += model.smax_m / depth * ix * jy
         result[:, 2] -= model.smax_m * ix * iy
     return result.reshape(points.shape)
+
+
+def analytical_flat_strain(project: Project, model: FlatModel, xyz_m) -> np.ndarray:
+    """Exact Ex/Ey reference from differentiated first moments, without FD."""
+    depth = flat_depth_m(project)
+    radius = influence_radius_m(depth, model)
+    points = evaluation_points(project, xyz_m)
+    flat = points.reshape(-1, 3)
+    result = np.zeros((len(flat), 2))
+    for tile in union_tiles(project.extraction_rectangles):
+        ix, _ = _axis_integrals(tile.xmin_m, tile.xmax_m, flat[:, 0], radius)
+        iy, _ = _axis_integrals(tile.ymin_m, tile.ymax_m, flat[:, 1], radius)
+        ax, bx = (tile.xmin_m - flat[:, 0]) / radius, (tile.xmax_m - flat[:, 0]) / radius
+        ay, by = (tile.ymin_m - flat[:, 1]) / radius, (tile.ymax_m - flat[:, 1]) / radius
+        with np.errstate(over="ignore", under="ignore"):
+            jx_derivative = ax * np.exp(-math.pi * ax**2) - bx * np.exp(-math.pi * bx**2)
+            jy_derivative = ay * np.exp(-math.pi * ay**2) - by * np.exp(-math.pi * by**2)
+        result[:, 0] += model.smax_m / depth * jx_derivative * iy
+        result[:, 1] += model.smax_m / depth * ix * jy_derivative
+    return result.reshape((*points.shape[:-1], 2))
