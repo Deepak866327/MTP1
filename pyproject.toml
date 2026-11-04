@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "subsidence-rebuild"
-version = "0.1.0"
-description = "Reproducible subsidence project: geometry and independent meshes"
+version = "0.2.0"
+description = "Reproducible subsidence project: geometry and verified flat-seam displacement"
 requires-python = ">=3.11"
-dependencies = ["numpy==2.4.6"]
+dependencies = ["numpy==2.4.6", "matplotlib==3.10.8"]
 
 [project.scripts]
 subsidence = "subsidence.cli:main"

@@ -14,6 +14,6 @@
   "provenance": {"description": "Constructed verification geometry; contains no field observations."},
   "notes": [
     "Synthetic geometry, not a mine validation case.",
-    "Phase 1 contains geometry only. Displacement and strain are not yet calculated."
+    "Pair with examples/flat_model.json for synthetic Phase 2 displacement. Strain belongs to Phase 3."
   ]
 }

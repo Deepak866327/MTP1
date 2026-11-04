@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "model": "flat_stochastic_gaussian",
+  "units": {"length": "m", "angle": "degrees"},
+  "smax_m": 1.0,
+  "influence_angle_deg": 20.0,
+  "kernel_support": "full_gaussian"
+}

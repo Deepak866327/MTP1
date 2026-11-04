@@ -1,4 +1,4 @@
-"""Strict, versioned JSON project files; no solver parameters are inferred."""
+"""Strict project geometry and separate versioned flat-model settings."""
 
 from dataclasses import asdict, dataclass, field
 import json
@@ -152,3 +152,55 @@ def save_project(project: Project, path: str | Path) -> None:
         json.dumps(project.to_dict(), indent=2, ensure_ascii=False, allow_nan=False) + "\n",
         encoding="utf-8",
     )
+
+
+@dataclass(frozen=True)
+class FlatModel:
+    """Smax is a settlement magnitude in metres, not a subsidence factor or p."""
+
+    smax_m: float
+    influence_angle_deg: float
+    kernel_support: str = "full_gaussian"
+
+    def __post_init__(self):
+        amplitude = finite_number(self.smax_m, "smax_m")
+        angle = finite_number(self.influence_angle_deg, "influence_angle_deg")
+        if amplitude < 0:
+            raise ValidationError("smax_m must be nonnegative (positive settlement magnitude).")
+        if not 0 < angle < 90:
+            raise ValidationError("influence_angle_deg must lie strictly between 0 and 90 degrees.")
+        if self.kernel_support != "full_gaussian":
+            raise ValidationError("Phase 2 supports only kernel_support='full_gaussian'.")
+        object.__setattr__(self, "smax_m", amplitude)
+        object.__setattr__(self, "influence_angle_deg", angle)
+
+    def to_dict(self) -> dict:
+        return {
+            "schema_version": 1,
+            "model": "flat_stochastic_gaussian",
+            "units": {"length": "m", "angle": "degrees"},
+            "smax_m": self.smax_m,
+            "influence_angle_deg": self.influence_angle_deg,
+            "kernel_support": self.kernel_support,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "FlatModel":
+        _keys(data, ("schema_version", "model", "units", "smax_m", "influence_angle_deg", "kernel_support"), label="flat model")
+        if type(data["schema_version"]) is not int or data["schema_version"] != 1:
+            raise ValidationError("Only integer flat-model schema_version 1 is supported.")
+        if data["model"] != "flat_stochastic_gaussian":
+            raise ValidationError("Expected model='flat_stochastic_gaussian'.")
+        if data["units"] != {"length": "m", "angle": "degrees"}:
+            raise ValidationError("Flat-model units must be metres and degrees.")
+        return cls(data["smax_m"], data["influence_angle_deg"], data["kernel_support"])
+
+
+def load_flat_model(path: str | Path) -> FlatModel:
+    with Path(path).open(encoding="utf-8-sig") as handle:
+        data = json.load(handle, object_pairs_hook=_unique_object, parse_constant=_reject_constant)
+    return FlatModel.from_dict(data)
+
+
+def save_flat_model(model: FlatModel, path: str | Path) -> None:
+    Path(path).write_text(json.dumps(model.to_dict(), indent=2, allow_nan=False) + "\n", encoding="utf-8")

@@ -4,7 +4,21 @@ Updated: 2026-11-04. This file is durable workspace context, not a claim of glob
 
 ## User intent and current status
 
-The user wants to understand MTP 1.pdf and subsidence pdf .pdf, rebuild the same scientific project with modest improvements, and receive a phase-by-phase document. On 2026-11-04 the user requested Phase 1 implementation. Phase 1 geometry, strict project inputs, independent meshes, previews and exports are implemented. Displacement/strain prediction is not implemented, and no field result has been reproduced here.
+The user wants to understand MTP 1.pdf and subsidence pdf .pdf, rebuild the same scientific project with modest improvements, and receive a phase-by-phase document. On 2026-11-04 the user requested Phases 1 and 2, then instructed committing/pushing Phase 1 before continuing Phase 2. Phase 1 was pushed first; Phase 2 is now implemented locally. Geometry, independent meshes and verified flat-seam Ux/Uy/Uz prediction work. Strain and inclined prediction remain unimplemented, and no field result has been reproduced here.
+
+## Git baseline and implemented Phase 2
+
+- Repository initialized on main; origin is https://github.com/Deepak866327/MTP1.git. Phase 1-only commit cf1860d87bbd1e94eac2be9ff265749cc015148a was pushed and remote main verified. Its isolated staged snapshot passed all 25 Phase 1 tests. Phase 2 was kept out of that commit. The user subsequently requested committing Phase 2, which is recorded in a separate local commit; only Phase 1 has been pushed.
+- Package version 0.2.0; direct dependencies numpy==2.4.6 and matplotlib==3.10.8. Separate strict FlatModel settings JSON leaves geometry schema v1 compatible. examples/flat_model.json uses synthetic Smax=1 m, influence_angle_deg=20, kernel_support=full_gaussian.
+- Modules: influence (kernel and H/R), solver (chunked midpoint superposition), reference (analytical Gaussian zeroth/first moments), results/plotting (arrays/CSV/metadata and standalone scientific maps), verification (repeatable acceptance report and convergence).
+- Conventions: exact horizontal seam required; H=surface_z-reference_z; R=H*tan(beta); full Gaussian exp(-pi*r^2/R^2)/R^2, no cutoff or mined-part renormalization; plan-area weighting; dUx=dS*(xa-Px)/H, dUy=dS*(ya-Py)/H, dUz=-dS. Smax is explicitly a positive settlement magnitude in metres; p and inclined conventions remain unresolved.
+- solve_flat(project,model,xyz_m=None) returns matching (...,3) arrays. Default shape (ny,nx,3). Supplied station points must lie on the configured horizontal surface within 1e-9 m. Empty sources/zero amplitude yield exact zero; supplied empty coordinates are supported. Observation/source blocks default 128/2048; chunk product limited to 1,048,576 pairs. No full source-by-observation allocation.
+- CLI: .\.venv\Scripts\python.exe -m subsidence solve-flat examples/synthetic_flat.json --model examples/flat_model.json --output <new-empty-path>; verify-flat --output <new-empty-path> generates synthetic acceptance evidence. Inclined Adriyala input is explicitly rejected by solve-flat.
+- Generated local bundles: outputs/phase2_flat (800 sources, 2,000 surface points, displacement arrays/CSV, maps PNG/SVG, saved project/model, metadata); outputs/phase2_verification (11 passing acceptance checks, analytical comparison and convergence CSV/plots/report). Maps were visually inspected.
+- Synthetic default-grid sampled peak settlement is 0.9100269318 m. Analytical continuous center settlement is 0.9143554105 m; the even grid omits the exact center. These are synthetic predictions, not Adriyala results.
+- Convergence at 35 fixed coordinates: max component errors for source spacings 40,20,10,5,2.5 m are 0.00873848719,0.00218256455,0.000545401290,0.000136333766,0.0000340823830 m. Roughly second order. Fixed finest-mesh tolerance 2e-4 m; symmetry/scaling/chunk equivalence 1e-12 m. Other meshes require their own convergence checks before calibration; no accuracy guarantee is inferred.
+- Verification: .\.venv\Scripts\python.exe -m unittest discover -s tests -v; all 50 tests pass (25 per phase), including separate Gauss-Legendre integration of all analytical components, kernel mass/support, working-array bounds, exact station prediction, sign/symmetry/linearity, overlap union, invalid inputs, and saved-run/CLI reproduction. Docs: docs/PHASE2_IMPLEMENTATION.md and updated README. Main plan/Word/PDF remain dated planning snapshots.
+- Next phase: Phase 3 strain and custom profiles. No field RMSE or improved accuracy claim is supported yet.
 
 ## Implemented Phase 1
 
@@ -18,7 +32,7 @@ The user wants to understand MTP 1.pdf and subsidence pdf .pdf, rebuild the same
 - Generated example bundles: outputs/synthetic_flat and outputs/adriyala_geometry, including SVG previews and inspection PNG copies. outputs is ignored; regenerate with a fresh output directory.
 - Verification: .\.venv\Scripts\python.exe -m unittest discover -s tests -v; 25 tests passed, including an independent union-area oracle, overlap/partial/empty regions, source-plane/depth checks, mesh independence, config/export round trips and CLI checks.
 - Implementation conventions and acceptance evidence: docs/PHASE1_IMPLEMENTATION.md. README has setup/run instructions. The main plan and Word/PDF copies remain dated planning documents.
-- Next numerical phase is Phase 2 flat-seam displacement plus analytical rectangular-integral checks. Phase 0 inclined/amplitude/support gaps remain logged; Phase 1 does not resolve them or add a solver.
+- Phase 2 subsequently implemented the flat solver as described above. Phase 0 inclined/amplitude/support gaps remain logged; Phase 1 itself does not resolve them or add a solver.
 
 ## Sources
 
@@ -59,7 +73,7 @@ MTP PDF pp.27–28 duplicate the same Uz/Ey page. Textbook pp.27–28 duplicate 
 
 ## Implementation choices and remaining proposals
 
-Preserve the scientific method and scope. Phase 1 uses Python/NumPy. SciPy/pandas with Plotly and local Streamlit UI remain the proposed stack for later phases, not implemented dependencies. If C++ is an academic requirement or original code becomes available, retain a C++ core; otherwise add it only for a measured performance need. No hosted website or cloud service is needed for the initial project.
+Preserve the scientific method and scope. Phases 1/2 use Python/NumPy with Matplotlib for scientific figures. SciPy/pandas with Plotly and local Streamlit UI remain the proposed stack for later phases, not implemented dependencies. If C++ is an academic requirement or original code becomes available, retain a C++ core; otherwise add it only for a measured performance need. No hosted website or cloud service is needed for the initial project.
 
 Three modest improvements: repeatable bounded calibration of amplitude and beta; numerical convergence plus held-out field metrics; saved projects and complete export bundles. Sensitivity envelopes or shear/principal strain are optional. Never claim improved accuracy before testing. Steep seams, interacting multiple seams, time dependence, geological layering, and structural-damage classification are future research scope.
 
