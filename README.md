@@ -2,9 +2,9 @@
 
 This workspace contains the source material and rebuild plan for a surface subsidence and strain prediction project using the Influence Function Method for flat and gently inclined coal seams.
 
-Phases 1–4 and the available-data Phase 5 workflow are implemented: geometry, flat/inclined displacement, global strain/profiles, station-data ingestion/evaluation, and an approximate audit of the published Adriyala curves. Exact original-engine and Adriyala field-result reproduction remain incomplete because raw measurements, survey coordinates and some original conventions are missing.
+Phases 1–4, the available-data Phase 5 workflow and Phase 6 calibration software are implemented: geometry, flat/inclined displacement, global strain/profiles, station evaluation, an approximate published-curve audit, and bounded amplitude/angle fitting with held-out evaluation. Exact original-engine and Adriyala field-result reproduction remain incomplete because raw measurements, survey coordinates and some original conventions are missing.
 
-The implementation uses Python 3.11+ with pinned NumPy and Matplotlib. From this directory in PowerShell:
+The implementation uses Python 3.11+ with pinned NumPy, Matplotlib and SciPy. From this directory in PowerShell:
 
 ```powershell
 python -m venv .venv
@@ -21,6 +21,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m subsidence verify-inclined --output outputs/inclined_verification
 .\.venv\Scripts\python.exe -m subsidence audit-report-profiles data/adriyala_digitized/report_traces.json --output outputs/adriyala_published_audit
 .\.venv\Scripts\python.exe -m subsidence verify-baseline --output outputs/baseline_verification
+.\.venv\Scripts\python.exe -m subsidence verify-calibration --output outputs/calibration_verification
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
@@ -46,11 +47,16 @@ For a reported-geometry demonstration, use `examples/adriyala_geometry.json`, `e
 
 All **125 tests** and **9 synthetic baseline-workflow checks** pass. Phase 5's exact Adriyala reproduction remains incomplete until real station coordinates/measurements and matching conventions are available; the approximate graph audit and station workflow are ready.
 
+`calibrate-stations <project.json> --model <manual-model.json> --observations <stations.csv> --metadata <metadata.json> --settings <calibration-settings.json> --output <new-directory>` fits amplitude (flat Smax or inclined p, metres) and beta (degrees) using only stations assigned `fit`. It runs several bounded least-squares starts, saves all objectives/statuses and identifiability diagnostics, then evaluates frozen fitted and manual settings on the held-out `test` stations. It exports a report, residual plots, raw inputs and a reusable `fitted_model.json`. Failed starts are retained; no converged start means no fitted model or test evaluation.
+
+`verify-calibration` generates independent-reference flat/inclined synthetic recovery cases and replayable station inputs. The [Phase 6 guide](docs/PHASE6_IMPLEMENTATION.md) gives a complete calibration/replay command. [Example calibration settings](examples/calibration_settings.synthetic.json) use explicitly synthetic bounds and are rejected for field data. Actual site fitting requires documented physical bounds plus located observations; the unlocated published curves cannot supply those coordinates. **All 144 tests and 18 synthetic calibration checks pass.** Synthetic recovery establishes software behavior; Adriyala field calibration remains pending data.
+
 - [Phase 1 implementation, conventions, and acceptance results](docs/PHASE1_IMPLEMENTATION.md)
 - [Phase 2 equations, usage, and verification results](docs/PHASE2_IMPLEMENTATION.md)
 - [Phase 3 strain, profiles, and verification results](docs/PHASE3_IMPLEMENTATION.md)
 - [Phase 4 derivation, conventions, and verification results](docs/PHASE4_IMPLEMENTATION.md)
 - [Phase 5 baseline workflow, digitization, and evidence limits](docs/PHASE5_IMPLEMENTATION.md)
+- [Phase 6 calibration, held-out policy, bounds and verification](docs/PHASE6_IMPLEMENTATION.md)
 - [Adriyala data inventory and missing inputs](docs/ADRIYALA_DATA_INVENTORY.md)
 - [Synthetic flat-panel project](examples/synthetic_flat.json)
 - [Synthetic flat-model settings](examples/flat_model.json)
@@ -66,7 +72,7 @@ The original project and the complete rebuild plan are described in:
 - [Durable project memory](PROJECT_MEMORY.md)
 - [Reported Adriyala inputs, with unresolved conventions](docs/adriyala_reported_inputs.json)
 
-The plan and its Word/PDF copies are the 3 November planning documents. The Phase 1–5 implementation notes and project memory record the current implementation status. The main plan includes the original model and software features, equations, case-study parameters, reported validation results, reproduction gaps, modest improvements, suggested architecture, and nine implementation phases with acceptance criteria.
+The plan and its Word/PDF copies are the 3 November planning documents. The Phase 1–6 implementation notes and project memory record the current implementation status. The main plan includes the original model and software features, equations, case-study parameters, reported validation results, reproduction gaps, modest improvements, suggested architecture, and nine implementation phases with acceptance criteria.
 
 Source OCR and upright page images are in docs/source_extracts. OCR is imperfect; precise equations and values should be checked against the images and original PDFs.
 

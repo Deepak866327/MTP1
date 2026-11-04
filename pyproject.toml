@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "subsidence-rebuild"
-version = "0.5.0"
-description = "Subsidence prediction, strain, profiles and provenance-aware baseline comparisons"
+version = "0.6.0"
+description = "Subsidence prediction, strain, profiles, station comparisons and bounded calibration"
 requires-python = ">=3.11"
-dependencies = ["numpy==2.4.6", "matplotlib==3.10.8"]
+dependencies = ["numpy==2.4.6", "matplotlib==3.10.8", "scipy==1.17.1"]
 
 [project.scripts]
 subsidence = "subsidence.cli:main"

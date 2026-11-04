@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "units": {"amplitude": "m", "angle": "degrees"},
+  "amplitude_bounds_m": [0, 3.5],
+  "influence_angle_bounds_deg": [10, 40],
+  "initial_guesses": [
+    {"amplitude_m": 0.4, "influence_angle_deg": 12},
+    {"amplitude_m": 1.3, "influence_angle_deg": 20},
+    {"amplitude_m": 2.8, "influence_angle_deg": 36}
+  ],
+  "bounds_basis": "synthetic_demonstration",
+  "bounds_justification": "Constructed demonstration: amplitude 0..3.5 m assumes an illustrative 3.5 m extraction height; beta 10..40 degrees deliberately brackets known synthetic truth. These are not established Adriyala bounds.",
+  "max_nfev": 200,
+  "ftol": 1e-10,
+  "xtol": 1e-10,
+  "gtol": 1e-10
+}

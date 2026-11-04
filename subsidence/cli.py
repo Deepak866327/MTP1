@@ -59,8 +59,38 @@ def main(argv=None) -> int:
     audit.add_argument("--output", required=True, help="New or empty audit directory.")
     verify_baseline = commands.add_parser("verify-baseline", help="Verify station ingestion, sign conversion and known residual metrics on synthetic data.")
     verify_baseline.add_argument("--output", required=True, help="New or empty verification directory.")
+    calibrate = commands.add_parser("calibrate-stations", help="Fit amplitude/beta on fit-role stations, then evaluate frozen settings on test stations.")
+    calibrate.add_argument("project", help="Geometry project JSON.")
+    calibrate.add_argument("--model", required=True, help="Manual flat/inclined comparison settings JSON.")
+    calibrate.add_argument("--observations", required=True, help="Station coordinates/observed Uz CSV.")
+    calibrate.add_argument("--metadata", required=True, help="Measurement provenance and predefined fit/test roles JSON.")
+    calibrate.add_argument("--settings", required=True, help="Explicit bounds, justification, starts and optimizer settings JSON.")
+    calibrate.add_argument("--output", required=True, help="New or empty calibration directory.")
+    verify_calibration = commands.add_parser("verify-calibration", help="Recover known synthetic parameters using independent references and held-out stations.")
+    verify_calibration.add_argument("--output", required=True, help="New or empty verification directory.")
     args = parser.parse_args(argv)
     try:
+        if args.command == "verify-calibration":
+            from .phase6_verification import export_calibration_verification
+            report = export_calibration_verification(args.output)
+            print(json.dumps({"output": args.output, "passed": report["passed"], "check_count": len(report["checks"]), "evidence": report["evidence"]}, indent=2))
+            return 0 if report["passed"] else 1
+        if args.command == "calibrate-stations":
+            from .calibration import CalibrationFailure, calibrate_stations, load_calibration_settings
+            from .observations import load_observations
+            from .phase6_results import export_calibration, export_calibration_failure
+            project, model = load_project(args.project), load_model(args.model)
+            dataset = load_observations(args.observations, args.metadata)
+            settings = load_calibration_settings(args.settings)
+            try:
+                result = calibrate_stations(project, model, dataset, settings)
+            except CalibrationFailure as failure:
+                summary = export_calibration_failure(project, model, dataset, settings, failure, args.output)
+                print(json.dumps({"output": args.output, **summary}, indent=2))
+                return 1
+            summary = export_calibration(result, args.output)
+            print(json.dumps({"output": args.output, "status": summary["status"], "fitted_model": summary["fitted_model"], "role_metrics": summary["fitted_role_metrics"], "warnings": summary["diagnostics"]["warnings"]}, indent=2))
+            return 0
         if args.command == "verify-baseline":
             from .phase5_verification import export_baseline_verification
             report = export_baseline_verification(args.output)

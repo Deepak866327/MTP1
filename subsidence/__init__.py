@@ -10,8 +10,9 @@ from .inclined import solve_inclined
 from .seam_frame import SeamFrame
 from .observations import ObservationDataset, ObservationMetadata, StationObservation, load_observations
 from .evaluation import BaselineResult, evaluate_stations, residual_metrics
+from .calibration import CalibrationFailure, CalibrationResult, CalibrationSettings, calibrate_stations, load_calibration_settings
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 __all__ = [
     "Project", "Rectangle", "SeamPlane", "ValidationError", "SourceMesh",
     "SurfaceGrid", "load_project", "save_project", "build_source_mesh",
@@ -22,4 +23,5 @@ __all__ = [
     "InclinedModel", "load_model", "save_model", "solve_inclined", "SeamFrame",
     "ObservationDataset", "ObservationMetadata", "StationObservation", "load_observations",
     "BaselineResult", "evaluate_stations", "residual_metrics",
+    "CalibrationFailure", "CalibrationResult", "CalibrationSettings", "calibrate_stations", "load_calibration_settings",
 ]
