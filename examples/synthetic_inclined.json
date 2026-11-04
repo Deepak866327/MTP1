@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "name": "Synthetic 10-degree inclined panel",
+  "evidence": "synthetic_geometry",
+  "units": {"length": "m"},
+  "surface_elevation_m": 0.0,
+  "field": {"xmin_m": -500.0, "xmax_m": 500.0, "ymin_m": -400.0, "ymax_m": 400.0},
+  "seam": {"reference_xyz_m": [0.0, 0.0, -400.0], "normal_xyz": [0.0, 0.17364817766693033, 0.984807753012208]},
+  "extraction_rectangles": [{"xmin_m": -200.0, "xmax_m": 200.0, "ymin_m": -100.0, "ymax_m": 100.0}],
+  "source_mesh": {"dx_m": 10.0, "dy_m": 10.0},
+  "surface_grid": {"dx_m": 20.0, "dy_m": 20.0},
+  "provenance": {"description": "Synthetic geometry for the explicit Phase 4 seam-frame reconstruction; no field observations."},
+  "notes": ["Uses examples/inclined_model.json. Area, amplitude, depth and support conventions are explicit rebuild choices; the original engine is unavailable."]
+}

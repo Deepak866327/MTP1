@@ -4,14 +4,14 @@ import argparse
 import json
 import sys
 
-from .config import load_flat_model, load_project
+from .config import load_flat_model, load_model, load_project
 from .export import export_geometry
 from .mesh import build_source_mesh, build_surface_grid
 from .solver import solve_flat
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Subsidence rebuild — geometry, flat displacement, strain and profiles.")
+    parser = argparse.ArgumentParser(description="Subsidence rebuild — flat/inclined displacement, strain and profiles.")
     commands = parser.add_subparsers(dest="command", required=True)
     validate = commands.add_parser("validate", help="Validate a version-1 project and physical geometry.")
     validate.add_argument("project", help="Path to project JSON.")
@@ -37,8 +37,25 @@ def main(argv=None) -> int:
     sample.add_argument("--output", required=True, help="New or empty profile directory.")
     verify_deformation = commands.add_parser("verify-deformation", help="Verify strain derivatives and line interpolation.")
     verify_deformation.add_argument("--output", required=True, help="New or empty verification directory.")
+    for name, description in (("solve-inclined", "Calculate gently inclined seam Ux/Uy/Uz using explicit v1 conventions."), ("deform-inclined", "Calculate gently inclined displacement, Ex/Ey and optional profiles.")):
+        command = commands.add_parser(name, help=description)
+        command.add_argument("project", help="Geometry project JSON (dip 0–12 degrees).")
+        command.add_argument("--model", required=True, help="Explicit inclined-model settings JSON.")
+        command.add_argument("--output", required=True, help="New or empty result directory.")
+        command.add_argument("--observation-chunk-size", type=int, default=128)
+        command.add_argument("--source-chunk-size", type=int, default=2048)
+        if name == "deform-inclined":
+            command.add_argument("--profiles", help="Optional line-profile definitions JSON.")
+    verify_inclined = commands.add_parser("verify-inclined", help="Verify transformations, zero dip and inclined numerical convergence.")
+    verify_inclined.add_argument("--output", required=True, help="New or empty verification directory.")
     args = parser.parse_args(argv)
     try:
+        if args.command == "verify-inclined":
+            from .phase4_verification import export_inclined_verification, run_inclined_verification
+            report = run_inclined_verification()
+            export_inclined_verification(report, args.output)
+            print(json.dumps({"passed": report["passed"], "output": args.output, "check_count": len(report["checks"])}, indent=2))
+            return 0 if report["passed"] else 1
         if args.command == "verify-deformation":
             from .phase3_verification import export_deformation_verification, run_deformation_verification
             report = run_deformation_verification()
@@ -76,23 +93,34 @@ def main(argv=None) -> int:
                 "corner_vertical_depth_range_m": summary["extraction_corner_vertical_depth_range_m"],
                 "status": summary["status"],
             }, indent=2))
-        elif args.command == "solve-flat":
+        elif args.command in ("solve-flat", "solve-inclined"):
             from .results import export_displacements
-            model = load_flat_model(args.model)
+            if args.command == "solve-inclined":
+                from .inclined import solve_inclined
+                model = load_model(args.model)
+                solver = solve_inclined
+            else:
+                model, solver = load_flat_model(args.model), solve_flat
             surface = build_surface_grid(project)
-            result = solve_flat(project, model, surface.xyz_m, observation_chunk_size=args.observation_chunk_size, source_chunk_size=args.source_chunk_size)
+            result = solver(project, model, surface.xyz_m, observation_chunk_size=args.observation_chunk_size, source_chunk_size=args.source_chunk_size)
             summary = export_displacements(project, model, surface, result, args.output)
             print(json.dumps({"output": args.output, "source_count": summary["source_count"], "evaluation_point_count": summary["evaluation_point_count"], "peak_sampled_settlement_m": summary["peak_sampled_settlement_m"], "status": summary["status"]}, indent=2))
         else:
             from .deformation import horizontal_strain
             from .phase3_results import export_deformation
             from .profiles import load_profiles, sample_profile
-            model = load_flat_model(args.model)
+            if args.command == "deform-inclined":
+                from .inclined import solve_inclined
+                model = load_model(args.model)
+                solver = solve_inclined
+                kwargs = {"observation_chunk_size": args.observation_chunk_size, "source_chunk_size": args.source_chunk_size}
+            else:
+                model, solver, kwargs = load_flat_model(args.model), solve_flat, {}
             surface = build_surface_grid(project)
             # Check derivative feasibility before the potentially expensive solve.
             from .grid_fields import surface_axes
             surface_axes(surface, minimum_points=3)
-            result = solve_flat(project, model, surface.xyz_m)
+            result = solver(project, model, surface.xyz_m, **kwargs)
             strain = horizontal_strain(surface, result.displacement_m)
             lines = load_profiles(args.profiles) if args.profiles else ()
             profiles = tuple(sample_profile(surface, result.displacement_m, strain, line) for line in lines)

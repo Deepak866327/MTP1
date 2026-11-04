@@ -7,7 +7,7 @@ from pathlib import Path
 
 import numpy as np
 
-from .config import FlatModel, Project, load_flat_model, load_project, save_flat_model, save_project
+from .config import Model, Project, load_model, load_project, save_model, save_project
 from .deformation import StrainResult, horizontal_strain
 from .geometry import ValidationError
 from .grid_fields import displacement_digest, numeric_field, surface_axes
@@ -28,7 +28,7 @@ def _json(path: Path, data):
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8")
 
 
-def export_profiles(profiles: tuple[ProfileResult, ...], output: str | Path, *, project: Project, model: FlatModel, strain: StrainResult, source_run: str | None = None) -> dict:
+def export_profiles(profiles: tuple[ProfileResult, ...], output: str | Path, *, project: Project, model: Model, strain: StrainResult, source_run: str | None = None) -> dict:
     if not profiles or len({p.line.name for p in profiles}) != len(profiles):
         raise ValidationError("Export requires at least one profile with unique names.")
     digest = strain.metadata["source_displacement_sha256"]
@@ -37,7 +37,7 @@ def export_profiles(profiles: tuple[ProfileResult, ...], output: str | Path, *, 
     target = Path(output)
     _new_directory(target)
     save_project(project, target / "project.json")
-    save_flat_model(model, target / "model.json")
+    save_model(model, target / "model.json")
     save_profiles(tuple(p.line for p in profiles), target / "profiles.json")
     records = []
     for index, profile in enumerate(profiles, start=1):
@@ -55,7 +55,7 @@ def export_profiles(profiles: tuple[ProfileResult, ...], output: str | Path, *, 
     return summary
 
 
-def export_deformation(project: Project, model: FlatModel, surface: SurfaceGrid, result: DisplacementResult, strain: StrainResult, output: str | Path, *, profiles: tuple[ProfileResult, ...] = ()) -> dict:
+def export_deformation(project: Project, model: Model, surface: SurfaceGrid, result: DisplacementResult, strain: StrainResult, output: str | Path, *, profiles: tuple[ProfileResult, ...] = ()) -> dict:
     surface_axes(surface, minimum_points=3)
     if not np.array_equal(strain.xyz_m, surface.xyz_m) or strain.metadata["source_displacement_sha256"] != displacement_digest(result.displacement_m):
         raise ValidationError("Strain does not match the displacement result and surface grid.")
@@ -85,7 +85,7 @@ def export_deformation(project: Project, model: FlatModel, surface: SurfaceGrid,
 @dataclass(frozen=True)
 class SavedGridRun:
     project: Project
-    model: FlatModel
+    model: Model
     surface: SurfaceGrid
     displacement_m: np.ndarray
 
@@ -93,7 +93,7 @@ class SavedGridRun:
 def load_grid_run(path: str | Path) -> SavedGridRun:
     """Read saved numeric arrays without calling the influence solver."""
     root = Path(path)
-    project, model = load_project(root / "project.json"), load_flat_model(root / "model.json")
+    project, model = load_project(root / "project.json"), load_model(root / "model.json")
     try:
         with np.load(root / "geometry.npz", allow_pickle=False) as arrays:
             surface = SurfaceGrid(arrays["surface_xyz_m"], arrays["surface_x_edges_m"], arrays["surface_y_edges_m"])

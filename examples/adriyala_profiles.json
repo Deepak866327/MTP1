@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "units": {"length": "m"},
+  "profiles": [
+    {"name": "Computational panel center along x (model output)", "start_xy_m": [5.0, 245.0], "end_xy_m": [2305.0, 245.0], "sample_count": 231},
+    {"name": "Computational panel center across y (model output)", "start_xy_m": [1155.0, 5.0], "end_xy_m": [1155.0, 465.0], "sample_count": 93}
+  ]
+}

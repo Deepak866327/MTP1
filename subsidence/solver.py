@@ -15,6 +15,14 @@ from .mesh import SourceMesh, build_source_mesh, build_surface_grid
 MAX_BLOCK_PAIRS = 1_048_576
 
 
+def validate_chunks(observation_chunk_size, source_chunk_size):
+    for name, value in (("observation_chunk_size", observation_chunk_size), ("source_chunk_size", source_chunk_size)):
+        if isinstance(value, bool) or not isinstance(value, Integral) or value <= 0:
+            raise ValidationError(f"{name} must be a positive integer.")
+    if int(observation_chunk_size) * int(source_chunk_size) > MAX_BLOCK_PAIRS:
+        raise ValidationError(f"Chunk product exceeds the {MAX_BLOCK_PAIRS:,}-pair working-array limit.")
+
+
 def evaluation_points(project: Project, xyz_m) -> np.ndarray:
     """Accept station arrays or grids, with the final axis containing xyz."""
     values = np.asarray(xyz_m)
@@ -63,11 +71,7 @@ def solve_flat(
     """
     depth = flat_depth_m(project)
     radius = influence_radius_m(depth, model)
-    for name, value in (("observation_chunk_size", observation_chunk_size), ("source_chunk_size", source_chunk_size)):
-        if isinstance(value, bool) or not isinstance(value, Integral) or value <= 0:
-            raise ValidationError(f"{name} must be a positive integer.")
-    if observation_chunk_size * source_chunk_size > MAX_BLOCK_PAIRS:
-        raise ValidationError(f"Chunk product exceeds the {MAX_BLOCK_PAIRS:,}-pair working-array limit.")
+    validate_chunks(observation_chunk_size, source_chunk_size)
     if xyz_m is None:
         xyz_m = build_surface_grid(project).xyz_m
     points = evaluation_points(project, xyz_m)

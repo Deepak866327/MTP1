@@ -29,7 +29,8 @@ def save_displacement_maps(project: Project, surface: SurfaceGrid, result: Displ
             axis.add_patch(PlotRectangle((rectangle.xmin_m, rectangle.ymin_m), rectangle.width_m, rectangle.height_m, fill=False, edgecolor="#333333", linewidth=0.8, linestyle="--"))
         axis.set(xlabel="Global x (m)", ylabel="Global y (m)", title=f"{label} (m)", xlim=(surface.x_edges_m[0], surface.x_edges_m[-1]), ylim=(surface.y_edges_m[0], surface.y_edges_m[-1]), aspect="equal")
         figure.colorbar(artist, ax=axis, shrink=0.75, label="Displacement (m)")
-    figure.suptitle(f"{project.name}\nFlat Gaussian model | {project.evidence} | Uz negative downward | dashed outlines: extraction", fontsize=12)
+    label = "Seam-frame Gaussian (v1 reconstruction)" if result.metadata["model"] == "inclined_seam_frame_gaussian_v1" else "Flat Gaussian model"
+    figure.suptitle(f"{project.name}\n{label} | {project.evidence} | Uz negative downward | dashed outlines: extraction", fontsize=12)
     figure.savefig(output / "displacement_maps.png", dpi=160)
     figure.savefig(output / "displacement_maps.svg")
 

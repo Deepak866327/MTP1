@@ -2,7 +2,7 @@
 
 This workspace contains the source material and rebuild plan for a surface subsidence and strain prediction project using the Influence Function Method for flat and gently inclined coal seams.
 
-Phases 1–3 are implemented: validated geometry, independent meshes, flat-seam Ux/Uy/Uz, global horizontal strains Ex/Ey, and custom line profiles with numerical verification. Inclined-seam prediction is the next phase.
+Phases 1–4 are implemented: validated geometry, independent meshes, flat and gently inclined Ux/Uy/Uz, global horizontal strains Ex/Ey, and custom profiles with numerical verification. The inclined solver uses explicit reconstruction conventions; exact original-engine and field-result reproduction remain incomplete.
 
 The implementation uses Python 3.11+ with pinned NumPy and Matplotlib. From this directory in PowerShell:
 
@@ -17,6 +17,8 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m subsidence deform-flat examples/synthetic_flat.json --model examples/flat_model.json --profiles examples/profiles.json --output outputs/flat_deformation
 .\.venv\Scripts\python.exe -m subsidence sample-profiles outputs/flat_deformation --profiles examples/profiles.json --output outputs/new_profiles
 .\.venv\Scripts\python.exe -m subsidence verify-deformation --output outputs/deformation_verification
+.\.venv\Scripts\python.exe -m subsidence deform-inclined examples/synthetic_inclined.json --model examples/inclined_model.json --profiles examples/profiles.json --output outputs/inclined_prediction
+.\.venv\Scripts\python.exe -m subsidence verify-inclined --output outputs/inclined_verification
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
@@ -30,14 +32,20 @@ The synthetic example contains 800 sources and 2,000 surface points. The Adriyal
 
 `deform-flat` adds strain maps, arrays and CSVs, plus profiles when `--profiles` is supplied. Derivatives use actual cell-center spacing and second-order one-sided boundaries, flagged in exports; at least three centers per axis are required. Ex/Ey are dimensionless, displayed in mm/m (multiply by 1000); positive means tensile. Profiles include distance, Ux/Uy/Uz and global Ex/Ey, including on oblique lines. Endpoints must be within the cell-center domain; extrapolation is disabled.
 
-`sample-profiles` reuses saved Phase 2 or Phase 3 displacement arrays and derives strain without rerunning the influence solver. Edit `examples/profiles.json` or use a copy to change lines. Keep the source run with these profile exports. `verify-deformation` checks manufactured derivatives, interpolation, direct-solver comparisons, and independent analytical strain convergence. All **76 tests** pass, retaining the previous 50 checks. The Phase 3 benchmark reaches 0.00170846 mm/m derivative error at 5 m observation spacing; this is a synthetic numerical check.
+`sample-profiles` reuses saved flat or inclined displacement arrays and derives strain without rerunning the influence solver. Edit `examples/profiles.json` or use a copy to change lines. Keep the source run with these profile exports. `verify-deformation` checks manufactured derivatives, interpolation, direct-solver comparisons, and independent analytical strain convergence. The Phase 3 benchmark reaches 0.00170846 mm/m derivative error at 5 m observation spacing; this is a synthetic numerical check.
+
+`solve-inclined` and `deform-inclined` support seam dip from 0 to 12 degrees. The model is versioned as `inclined_seam_frame_gaussian_v1`: normal distance from observation to plane, seam-tangent Gaussian, seam-area weighting, local amplitude p/nz, and rotation of the full displacement vector back to global coordinates. Full Gaussian support is retained. These choices are documented reconstructions of incompletely specified source conventions. All **102 tests** and **27 Phase 4 acceptance checks** pass; the zero-dip solver agrees with the flat engine and the synthetic 2.5 m mesh error is about 0.033 mm against independent integration.
+
+For a reported-geometry demonstration, use `examples/adriyala_geometry.json`, `examples/adriyala_inclined_model.json`, and `examples/adriyala_profiles.json` with `deform-inclined`. This applies reported p=1.3 m and beta=20 degrees under the explicit v1 reconstruction; it does not reproduce the reported field RMSE. Raw monitoring data is still needed for Phase 5.
 
 - [Phase 1 implementation, conventions, and acceptance results](docs/PHASE1_IMPLEMENTATION.md)
 - [Phase 2 equations, usage, and verification results](docs/PHASE2_IMPLEMENTATION.md)
 - [Phase 3 strain, profiles, and verification results](docs/PHASE3_IMPLEMENTATION.md)
+- [Phase 4 derivation, conventions, and verification results](docs/PHASE4_IMPLEMENTATION.md)
 - [Synthetic flat-panel project](examples/synthetic_flat.json)
 - [Synthetic flat-model settings](examples/flat_model.json)
 - [Example profile definitions](examples/profiles.json)
+- [Synthetic inclined geometry](examples/synthetic_inclined.json) and [inclined settings](examples/inclined_model.json)
 - [Reported Adriyala geometry project](examples/adriyala_geometry.json)
 
 The original project and the complete rebuild plan are described in:
@@ -48,7 +56,7 @@ The original project and the complete rebuild plan are described in:
 - [Durable project memory](PROJECT_MEMORY.md)
 - [Reported Adriyala inputs, with unresolved conventions](docs/adriyala_reported_inputs.json)
 
-The plan and its Word/PDF copies are the 3 November planning documents. The Phase 1–3 implementation notes and project memory record the current implementation status. The main plan includes the original model and software features, equations, case-study parameters, reported validation results, reproduction gaps, modest improvements, suggested architecture, and nine implementation phases with acceptance criteria.
+The plan and its Word/PDF copies are the 3 November planning documents. The Phase 1–4 implementation notes and project memory record the current implementation status. The main plan includes the original model and software features, equations, case-study parameters, reported validation results, reproduction gaps, modest improvements, suggested architecture, and nine implementation phases with acceptance criteria.
 
 Source OCR and upright page images are in docs/source_extracts. OCR is imperfect; precise equations and values should be checked against the images and original PDFs.
 

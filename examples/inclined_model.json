@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "model": "inclined_seam_frame_gaussian_v1",
+  "units": {"length": "m", "angle": "degrees"},
+  "p_m": 1.0,
+  "influence_angle_deg": 20.0,
+  "kernel_support": "full_gaussian",
+  "depth_convention": "observation_to_plane_normal",
+  "area_measure": "seam_area",
+  "amplitude_convention": "p_over_unit_normal_z"
+}

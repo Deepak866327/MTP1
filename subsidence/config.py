@@ -204,3 +204,67 @@ def load_flat_model(path: str | Path) -> FlatModel:
 
 def save_flat_model(model: FlatModel, path: str | Path) -> None:
     Path(path).write_text(json.dumps(model.to_dict(), indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
+
+@dataclass(frozen=True)
+class InclinedModel:
+    """Versioned seam-frame reconstruction; conventions are explicit and fixed."""
+
+    p_m: float
+    influence_angle_deg: float
+    kernel_support: str = "full_gaussian"
+    depth_convention: str = "observation_to_plane_normal"
+    area_measure: str = "seam_area"
+    amplitude_convention: str = "p_over_unit_normal_z"
+
+    def __post_init__(self):
+        amplitude = finite_number(self.p_m, "p_m")
+        if amplitude < 0:
+            raise ValidationError("p_m must be nonnegative and measured in metres.")
+        # Share the existing influence-angle/support rules without treating p as
+        # Smax: the inclined local amplitude is computed separately as p/n_z.
+        checked = FlatModel(amplitude, self.influence_angle_deg, self.kernel_support)
+        for name, expected in (("depth_convention", "observation_to_plane_normal"), ("area_measure", "seam_area"), ("amplitude_convention", "p_over_unit_normal_z")):
+            if getattr(self, name) != expected:
+                raise ValidationError(f"Inclined v1 requires {name}='{expected}'.")
+        object.__setattr__(self, "p_m", amplitude)
+        object.__setattr__(self, "influence_angle_deg", checked.influence_angle_deg)
+
+    def to_dict(self) -> dict:
+        return {
+            "schema_version": 1, "model": "inclined_seam_frame_gaussian_v1",
+            "units": {"length": "m", "angle": "degrees"},
+            "p_m": self.p_m, "influence_angle_deg": self.influence_angle_deg,
+            "kernel_support": self.kernel_support, "depth_convention": self.depth_convention,
+            "area_measure": self.area_measure, "amplitude_convention": self.amplitude_convention,
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict) -> "InclinedModel":
+        _keys(data, ("schema_version", "model", "units", "p_m", "influence_angle_deg", "kernel_support", "depth_convention", "area_measure", "amplitude_convention"), label="inclined model")
+        if type(data["schema_version"]) is not int or data["schema_version"] != 1:
+            raise ValidationError("Only integer inclined-model schema_version 1 is supported.")
+        if data["model"] != "inclined_seam_frame_gaussian_v1":
+            raise ValidationError("Expected model='inclined_seam_frame_gaussian_v1'.")
+        if data["units"] != {"length": "m", "angle": "degrees"}:
+            raise ValidationError("Inclined-model units must be metres and degrees.")
+        return cls(**{name: data[name] for name in ("p_m", "influence_angle_deg", "kernel_support", "depth_convention", "area_measure", "amplitude_convention")})
+
+
+Model = FlatModel | InclinedModel
+
+
+def load_model(path: str | Path) -> Model:
+    with Path(path).open(encoding="utf-8-sig") as handle:
+        data = json.load(handle, object_pairs_hook=_unique_object, parse_constant=_reject_constant)
+    if not isinstance(data, dict):
+        raise ValidationError("Model settings must be an object.")
+    if data.get("model") == "flat_stochastic_gaussian":
+        return FlatModel.from_dict(data)
+    if data.get("model") == "inclined_seam_frame_gaussian_v1":
+        return InclinedModel.from_dict(data)
+    raise ValidationError("Unsupported model: expected flat_stochastic_gaussian or inclined_seam_frame_gaussian_v1.")
+
+
+def save_model(model: Model, path: str | Path) -> None:
+    Path(path).write_text(json.dumps(model.to_dict(), indent=2, allow_nan=False) + "\n", encoding="utf-8")
