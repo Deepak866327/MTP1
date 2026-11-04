@@ -2,13 +2,14 @@
 
 This workspace contains the source material and rebuild plan for a surface subsidence and strain prediction project using the Influence Function Method for flat and gently inclined coal seams.
 
-Phases 1–4, the available-data Phase 5 workflow and Phase 6 calibration software are implemented: geometry, flat/inclined displacement, global strain/profiles, station evaluation, an approximate published-curve audit, and bounded amplitude/angle fitting with held-out evaluation. Exact original-engine and Adriyala field-result reproduction remain incomplete because raw measurements, survey coordinates and some original conventions are missing.
+Phases 1–7 are implemented as software: geometry, flat/inclined displacement, strain/profiles, station comparison, bounded calibration, and a local desktop workbench with portable saved runs. Exact original-engine and Adriyala field-result reproduction remain incomplete because raw measurements, survey coordinates and some original conventions are missing.
 
 The implementation uses Python 3.11+ with pinned NumPy, Matplotlib and SciPy. From this directory in PowerShell:
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip --use-feature=truststore install -r requirements.txt
+.\.venv\Scripts\python.exe -m subsidence gui
 .\.venv\Scripts\python.exe -m subsidence validate examples/adriyala_geometry.json
 .\.venv\Scripts\python.exe -m subsidence mesh examples/synthetic_flat.json --output outputs/flat_run
 .\.venv\Scripts\python.exe -m subsidence mesh examples/adriyala_geometry.json --output outputs/adriyala_run
@@ -22,8 +23,11 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m subsidence audit-report-profiles data/adriyala_digitized/report_traces.json --output outputs/adriyala_published_audit
 .\.venv\Scripts\python.exe -m subsidence verify-baseline --output outputs/baseline_verification
 .\.venv\Scripts\python.exe -m subsidence verify-calibration --output outputs/calibration_verification
+.\.venv\Scripts\python.exe -m subsidence verify-desktop --output outputs/desktop_verification
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
+
+The **desktop workbench** opens in a native window. Choose an example and click **Load example → Compute displacement + strain**. Edit geometry, extraction rectangles, grids and model parameters in the forms; inspect heatmaps, hover values and profiles; upload station CSV/metadata; or select **Synthetic calibration demo** to try automatic fitting. **Save project** retains settings and evidence; **Export run ZIP** saves complete numerical outputs and plots. **Open run ZIP** restores arrays and calibration details without rerunning the solver. Display/profile changes reuse cached results. See the [Phase 7 user guide](docs/PHASE7_IMPLEMENTATION.md). All **172 tests** and **14 synthetic desktop-bundle checks** pass.
 
 Open `preview.svg` in each output directory. Each bundle also contains the saved project, summary, source and surface CSVs, and coordinate/area arrays in `geometry.npz`. Output directories must be new or empty. Source spacing and surface spacing are separate inputs. Overlapping extraction rectangles contribute their union once; partially intersected cells use exact clipped rectangular fragments.
 
@@ -57,6 +61,7 @@ All **125 tests** and **9 synthetic baseline-workflow checks** pass. Phase 5's e
 - [Phase 4 derivation, conventions, and verification results](docs/PHASE4_IMPLEMENTATION.md)
 - [Phase 5 baseline workflow, digitization, and evidence limits](docs/PHASE5_IMPLEMENTATION.md)
 - [Phase 6 calibration, held-out policy, bounds and verification](docs/PHASE6_IMPLEMENTATION.md)
+- [Phase 7 desktop user guide, saved runs and verification](docs/PHASE7_IMPLEMENTATION.md)
 - [Adriyala data inventory and missing inputs](docs/ADRIYALA_DATA_INVENTORY.md)
 - [Synthetic flat-panel project](examples/synthetic_flat.json)
 - [Synthetic flat-model settings](examples/flat_model.json)
@@ -72,7 +77,7 @@ The original project and the complete rebuild plan are described in:
 - [Durable project memory](PROJECT_MEMORY.md)
 - [Reported Adriyala inputs, with unresolved conventions](docs/adriyala_reported_inputs.json)
 
-The plan and its Word/PDF copies are the 3 November planning documents. The Phase 1–6 implementation notes and project memory record the current implementation status. The main plan includes the original model and software features, equations, case-study parameters, reported validation results, reproduction gaps, modest improvements, suggested architecture, and nine implementation phases with acceptance criteria.
+The plan and its Word/PDF copies are the 3 November planning documents. The Phase 1–7 implementation notes and project memory record the current implementation status. The main plan includes the original model and software features, equations, case-study parameters, reported validation results, reproduction gaps, modest improvements, suggested architecture, and nine implementation phases with acceptance criteria.
 
 Source OCR and upright page images are in docs/source_extracts. OCR is imperfect; precise equations and values should be checked against the images and original PDFs.
 

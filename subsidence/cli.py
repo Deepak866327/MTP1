@@ -13,6 +13,10 @@ from .solver import solve_flat
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Subsidence rebuild — flat/inclined displacement, strain and profiles.")
     commands = parser.add_subparsers(dest="command", required=True)
+    gui = commands.add_parser("gui", help="Open the local desktop workbench for prediction, profiles and calibration.")
+    gui.add_argument("--project", help="Optional saved desktop project JSON to open.")
+    desktop_verify = commands.add_parser("verify-desktop", help="Create synthetic desktop run bundles and verify exact reopening.")
+    desktop_verify.add_argument("--output", required=True, help="New or empty verification directory.")
     validate = commands.add_parser("validate", help="Validate a version-1 project and physical geometry.")
     validate.add_argument("project", help="Path to project JSON.")
     mesh = commands.add_parser("mesh", help="Generate independent meshes, CSV/NPZ arrays and SVG preview.")
@@ -70,6 +74,15 @@ def main(argv=None) -> int:
     verify_calibration.add_argument("--output", required=True, help="New or empty verification directory.")
     args = parser.parse_args(argv)
     try:
+        if args.command == "gui":
+            from .desktop import launch
+            launch(args.project)
+            return 0
+        if args.command == "verify-desktop":
+            from .phase7_verification import export_desktop_verification
+            report = export_desktop_verification(args.output)
+            print(json.dumps({"output": args.output, "passed": report["passed"], "check_count": len(report["checks"]), "evidence": report["evidence"]}, indent=2))
+            return 0 if report["passed"] else 1
         if args.command == "verify-calibration":
             from .phase6_verification import export_calibration_verification
             report = export_calibration_verification(args.output)

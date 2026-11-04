@@ -40,6 +40,14 @@ def evaluate_stations(project: Project, model: Model, dataset: ObservationDatase
     # parameters, selects outliers, changes the datum, or snaps to a plot grid.
     solver = solve_inclined if isinstance(model, InclinedModel) else solve_flat
     prediction = solver(project, model, coordinates)
+    return summarize_stations(dataset, prediction)
+
+
+def summarize_stations(dataset: ObservationDataset, prediction: DisplacementResult) -> BaselineResult:
+    """Summarize supplied predictions, including arrays reopened from a run."""
+    expected_xy = np.array([[r.x_m, r.y_m] for r in dataset.stations])
+    if prediction.displacement_m.shape != (len(dataset.stations), 3) or prediction.xyz_m.shape != (len(dataset.stations), 3) or not np.all(np.isfinite(prediction.displacement_m)) or not np.array_equal(prediction.xyz_m[:, :2], expected_xy):
+        raise ValidationError("Station predictions must match the supplied finite station coordinates and count.")
     observed = np.array([r.uz_observed_m for r in dataset.stations])
     line_metrics, role_metrics = {}, {}
     for line_id, role in dataset.metadata.line_roles.items():

@@ -12,7 +12,7 @@ from .observations import ObservationDataset, ObservationMetadata, StationObserv
 from .evaluation import BaselineResult, evaluate_stations, residual_metrics
 from .calibration import CalibrationFailure, CalibrationResult, CalibrationSettings, calibrate_stations, load_calibration_settings
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 __all__ = [
     "Project", "Rectangle", "SeamPlane", "ValidationError", "SourceMesh",
     "SurfaceGrid", "load_project", "save_project", "build_source_mesh",
